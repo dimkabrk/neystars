@@ -75,26 +75,16 @@ header {
   margin: 0 auto;
 }
 
-/* Градиентный заголовок как на скриншоте */
 h1 {
   font-family: var(--accent-font);
   font-size: 3.5rem;
   text-transform: uppercase;
   margin-bottom: 1rem;
   letter-spacing: 2px;
-  background: linear-gradient(90deg, #FFD700 0%, #FFCC00 20%, #FFFFFF 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 h1 span {
-  background: inherit;
-  -webkit-background-clip: inherit;
-  background-clip: inherit;
-  -webkit-text-fill-color: inherit;
+  color: var(--accent);
 }
 
 .subtitle {
@@ -104,7 +94,7 @@ h1 span {
   font-weight: 400;
 }
 
-/* Остальные стили остаются без изменений */
+/* Сетка карточек */
 .cta-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -113,6 +103,7 @@ h1 span {
   margin: 0 auto;
 }
 
+/* Стили карточек */
 .price-card {
   padding: 2rem;
   text-align: center;
