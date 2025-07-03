@@ -41,7 +41,7 @@ body {
   background: var(--glass);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 16px;
 }
 
 /* Шапка */
@@ -75,6 +75,7 @@ header {
   margin: 0 auto;
 }
 
+/* Градиентный заголовок */
 h1 {
   font-family: var(--accent-font);
   font-size: 3.5rem;
@@ -95,21 +96,36 @@ h1 span {
   -webkit-text-fill-color: inherit;
 }
 
-/* Более круглые рамки */
-.glass,
-.price-card,
-.buy-btn {
-  border-radius: 16px !important;
+.subtitle {
+  font-size: 1.25rem;
+  opacity: 0.8;
+  margin-bottom: 3rem;
+  font-weight: 400;
 }
 
+/* Сетка карточек */
+.cta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Стили карточек */
 .price-card {
-  border-radius: 20px !important;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  border-radius: 20px;
   overflow: hidden;
 }
 
-/* Градиентная обводка */
+/* Градиентная обводка при наведении */
 .price-card:hover {
-  position: relative;
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
 .price-card:hover::before {
@@ -122,33 +138,41 @@ h1 span {
   background: linear-gradient(45deg, #ffd700, #ffcc00, #ffffff);
   border-radius: 22px;
   z-index: -1;
-  opacity: 0.5;
+  opacity: 0.4;
+}
+
+.price-card.accent {
+  border: none;
+}
+
+.price-card.accent:hover::before {
+  opacity: 0.6;
 }
 
 /* Содержимое карточек */
 .price-card h3 {
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
   font-weight: 600;
 }
 
 .amount {
   font-family: var(--accent-font);
-  font-size: 3.5rem;
+  font-size: 2.2rem;
   color: var(--accent);
   line-height: 1;
-  margin: 0.5rem 0;
+  margin: 0.3rem 0;
 }
 
 .stars-text {
-  font-size: 1.25rem;
+  font-size: 1rem;
   opacity: 0.8;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .price {
-  font-size: 1.75rem;
-  margin: 1.5rem 0;
+  font-size: 1.5rem;
+  margin: 1rem 0;
   font-weight: 700;
 }
 
@@ -157,16 +181,16 @@ h1 span {
   background: var(--accent);
   color: var(--dark);
   border: none;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1.5rem;
   font-family: var(--main-font);
-  font-weight: 700;
-  border-radius: 8px;
+  font-weight: 800;
+  border-radius: 12px;
   cursor: pointer;
   width: 100%;
   transition: all 0.3s;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 .buy-btn:hover {
@@ -192,6 +216,7 @@ footer {
   .cta-grid {
     grid-template-columns: 1fr;
     max-width: 400px;
+    gap: 1.5rem;
   }
   
   .subtitle {
@@ -199,6 +224,11 @@ footer {
   }
   
   .price-card {
-    padding: 1.5rem;
+    padding: 1.2rem;
+    border-radius: 18px;
+  }
+  
+  .amount {
+    font-size: 2rem;
   }
 }
