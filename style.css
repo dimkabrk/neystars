@@ -22,7 +22,6 @@ body {
   line-height: 1.6;
 }
 
-/* Фон со звёздами */
 .stars-bg {
   position: fixed;
   top: 0;
@@ -36,15 +35,13 @@ body {
   z-index: -1;
 }
 
-/* Стиль "стекло" */
 .glass {
   background: var(--glass);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  border-radius: 8px; /* Уменьшено до 8px */
 }
 
-/* Шапка */
 header {
   padding: 1.5rem 2rem;
   display: flex;
@@ -67,7 +64,6 @@ header {
   font-size: 1.5rem;
 }
 
-/* Основной контент */
 .hero {
   padding: 2rem;
   text-align: center;
@@ -75,7 +71,6 @@ header {
   margin: 0 auto;
 }
 
-/* Градиентный заголовок */
 h1 {
   font-family: var(--accent-font);
   font-size: 3.5rem;
@@ -103,7 +98,6 @@ h1 span {
   font-weight: 400;
 }
 
-/* Сетка карточек */
 .cta-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -112,17 +106,15 @@ h1 span {
   margin: 0 auto;
 }
 
-/* Стили карточек */
 .price-card {
   padding: 1.5rem;
   text-align: center;
   transition: all 0.3s ease;
   position: relative;
-  border-radius: 20px;
+  border-radius: 8px; /* Уменьшено до 8px */
   overflow: hidden;
 }
 
-/* Градиентная обводка при наведении */
 .price-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
@@ -136,7 +128,7 @@ h1 span {
   right: -2px;
   bottom: -2px;
   background: linear-gradient(45deg, #ffd700, #ffcc00, #ffffff);
-  border-radius: 22px;
+  border-radius: 10px; /* Соответствует карточке */
   z-index: -1;
   opacity: 0.4;
 }
@@ -149,7 +141,6 @@ h1 span {
   opacity: 0.6;
 }
 
-/* Содержимое карточек */
 .price-card h3 {
   font-size: 1.1rem;
   margin-bottom: 0.8rem;
@@ -176,7 +167,6 @@ h1 span {
   font-weight: 700;
 }
 
-/* Кнопки */
 .buy-btn {
   background: var(--accent);
   color: var(--dark);
@@ -184,7 +174,7 @@ h1 span {
   padding: 0.8rem 1.5rem;
   font-family: var(--main-font);
   font-weight: 800;
-  border-radius: 12px;
+  border-radius: 12px; /* Скругление для кнопок */
   cursor: pointer;
   width: 100%;
   transition: all 0.3s;
@@ -198,7 +188,6 @@ h1 span {
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
 }
 
-/* Подвал */
 footer {
   padding: 1.5rem;
   text-align: center;
@@ -207,7 +196,6 @@ footer {
   opacity: 0.7;
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
   h1 {
     font-size: 2.5rem;
@@ -225,7 +213,6 @@ footer {
   
   .price-card {
     padding: 1.2rem;
-    border-radius: 18px;
   }
   
   .amount {
