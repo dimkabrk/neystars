@@ -22,6 +22,7 @@ body {
   line-height: 1.6;
 }
 
+/* Фон со звёздами */
 .stars-bg {
   position: fixed;
   top: 0;
@@ -35,13 +36,15 @@ body {
   z-index: -1;
 }
 
+/* Стиль "стекло" */
 .glass {
   background: var(--glass);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px; /* Уменьшено до 8px */
+  border-radius: 12px;
 }
 
+/* Шапка */
 header {
   padding: 1.5rem 2rem;
   display: flex;
@@ -64,6 +67,7 @@ header {
   font-size: 1.5rem;
 }
 
+/* Основной контент */
 .hero {
   padding: 2rem;
   text-align: center;
@@ -71,17 +75,19 @@ header {
   margin: 0 auto;
 }
 
+/* Градиентный заголовок как на скриншоте */
 h1 {
   font-family: var(--accent-font);
   font-size: 3.5rem;
   text-transform: uppercase;
   margin-bottom: 1rem;
   letter-spacing: 2px;
-  background: linear-gradient(45deg, #ffd700, #ffcc00, #ffffff);
+  background: linear-gradient(90deg, #FFD700 0%, #FFCC00 20%, #FFFFFF 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 h1 span {
@@ -98,6 +104,7 @@ h1 span {
   font-weight: 400;
 }
 
+/* Остальные стили остаются без изменений */
 .cta-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -107,80 +114,71 @@ h1 span {
 }
 
 .price-card {
-  padding: 1.5rem;
+  padding: 2rem;
   text-align: center;
   transition: all 0.3s ease;
   position: relative;
-  border-radius: 8px; /* Уменьшено до 8px */
-  overflow: hidden;
+  border-radius: 12px;
 }
 
+/* Обводка при наведении */
 .price-card:hover {
+  box-shadow: 0 0 0 2px var(--accent), 
+              0 0 20px rgba(255, 215, 0, 0.3);
   transform: translateY(-5px);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-}
-
-.price-card:hover::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #ffd700, #ffcc00, #ffffff);
-  border-radius: 10px; /* Соответствует карточке */
-  z-index: -1;
-  opacity: 0.4;
 }
 
 .price-card.accent {
-  border: none;
+  border: 1px solid var(--accent);
 }
 
-.price-card.accent:hover::before {
-  opacity: 0.6;
+.price-card.accent:hover {
+  box-shadow: 0 0 0 3px var(--accent), 
+              0 0 25px rgba(255, 215, 0, 0.4);
 }
 
+/* Содержимое карточек */
 .price-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.8rem;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
   font-weight: 600;
 }
 
 .amount {
   font-family: var(--accent-font);
-  font-size: 2.2rem;
+  font-size: 3.5rem;
   color: var(--accent);
   line-height: 1;
-  margin: 0.3rem 0;
+  margin: 0.5rem 0;
 }
 
 .stars-text {
-  font-size: 1rem;
+  font-size: 1.25rem;
   opacity: 0.8;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .price {
-  font-size: 1.5rem;
-  margin: 1rem 0;
+  font-size: 1.75rem;
+  margin: 1.5rem 0;
   font-weight: 700;
 }
 
+/* Кнопки */
 .buy-btn {
   background: var(--accent);
   color: var(--dark);
   border: none;
-  padding: 0.8rem 1.5rem;
+  padding: 1rem 2rem;
   font-family: var(--main-font);
-  font-weight: 800;
-  border-radius: 12px; /* Скругление для кнопок */
+  font-weight: 700;
+  border-radius: 8px;
   cursor: pointer;
   width: 100%;
   transition: all 0.3s;
-  font-size: 1rem;
+  font-size: 1.1rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 .buy-btn:hover {
@@ -188,6 +186,7 @@ h1 span {
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
 }
 
+/* Подвал */
 footer {
   padding: 1.5rem;
   text-align: center;
@@ -196,6 +195,7 @@ footer {
   opacity: 0.7;
 }
 
+/* Адаптивность */
 @media (max-width: 768px) {
   h1 {
     font-size: 2.5rem;
@@ -204,7 +204,6 @@ footer {
   .cta-grid {
     grid-template-columns: 1fr;
     max-width: 400px;
-    gap: 1.5rem;
   }
   
   .subtitle {
@@ -212,10 +211,6 @@ footer {
   }
   
   .price-card {
-    padding: 1.2rem;
-  }
-  
-  .amount {
-    font-size: 2rem;
+    padding: 1.5rem;
   }
 }
