@@ -1,12 +1,13 @@
 /* Основные стили */
 :root {
     --primary-color: #0088cc;
-    --secondary-color: #6c5ce7;
-    --accent-color: #fd79a8;
+    --secondary-color: #2ecc71;
+    --accent-color: #f39c12;
     --text-color: #2d3436;
     --light-text: #f5f6fa;
-    --bg-color: #f5f6fa;
+    --bg-color: #f9f9f9;
     --card-bg: #ffffff;
+    --dark-bg: #1e272e;
 }
 
 * {
