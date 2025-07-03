@@ -3,56 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Звёзды в Telegram | Подарите звёзды</title>
-    <link rel="icon" href="logostar.png" type="image/png">
+    <title>Telegram Stars | Купить звёзды</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .hero-content {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-        }
-    </style>
 </head>
 <body>
-    <!-- Красивый звёздный фон -->
-    <div class="stars-background"></div>
+    <div class="telegram-background"></div>
     
     <header>
         <div class="logo">
-            <i class="fas fa-star" style="color: #FFD700;"></i>
+            <i class="fab fa-telegram"></i>
             <span> Telegram Stars</span>
         </div>
         <nav>
-            <a href="#about">О нас</a>
+            <a href="#products">Звёзды</a>
+            <a href="#premium">Позже!</a>
+            <a href="#gifts">Подарки</a>
             <a href="#how-it-works">Как купить</a>
-            <a href="#contact">Контакты</a>
         </nav>
     </header>
 
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h1>Подарите <span class="highlight">звёзды</span> в Telegram</h1>
-                <p>Яркий способ выразить свою признательность и поддержку</p>
-                <div class="cta-button pulse" id="buyButton">Купить 13 звёзд</div>
+                <h1>Купить звёзды Telegram</h1>
+                <p>По самой выгодной цене с быстрой доставкой</p>
+                <div class="cta-buttons">
+                    <div class="cta-button" id="buyStarsBtn">Купить звёзды</div>
+                    <div class="cta-button secondary" id="buyPremiumBtn">Купить премиум</div>
+                </div>
             </div>
         </section>
 
-        <section class="product-section" id="product">
-            <h2>Наш товар</h2>
-            <div class="product-card">
-                <div class="product-image">
-                    <i class="fas fa-gift"></i>
-                    <div class="stars-count">13</div>
+        <section class="products" id="products">
+            <h2>Выберите количество звёзд</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-badge">Популярный</div>
+                    <div class="product-stars">13 звёзд</div>
+                    <div class="product-price">25₽</div>
+                    <div class="buy-button">Купить</div>
                 </div>
-                <div class="product-details">
-                    <h3>Подарок 13 звёзд</h3>
-                    <p>Идеальный способ выразить свою благодарность или поддержать любимого автора</p>
-                    <div class="price">25₽</div>
-                    <div class="buy-button" id="productBuyButton">Купить через Telegram</div>
+                <div class="product-card">
+                    <div class="product-stars">25 звёзд</div>
+                    <div class="product-price">50₽</div>
+                    <div class="buy-button">Купить</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-stars">50 звёзд</div>
+                    <div class="product-price">84₽</div>
+                    <div class="buy-button">Купить</div>
                 </div>
             </div>
         </section>
@@ -61,61 +61,43 @@
             <h2>Как это работает</h2>
             <div class="steps">
                 <div class="step">
-                    <div class="step-number">1</div>
-                    <i class="fas fa-search"></i>
+                    <div class="step-icon"><i class="fas fa-mouse-pointer"></i></div>
                     <h3>Выберите товар</h3>
-                    <p>Выберите количество звёзд, которое хотите подарить</p>
+                    <p>Укажите количество звёзд или премиум</p>
                 </div>
                 <div class="step">
-                    <div class="step-number">2</div>
-                    <i class="fas fa-robot"></i>
+                    <div class="step-icon"><i class="fas fa-robot"></i></div>
                     <h3>Перейдите в бота</h3>
-                    <p>Нажмите кнопку "Купить" и вас перенаправит в Telegram бота</p>
+                    <p>Нажмите кнопку "Купить" для перехода в Telegram</p>
                 </div>
                 <div class="step">
-                    <div class="step-number">3</div>
-                    <i class="fas fa-credit-card"></i>
+                    <div class="step-icon"><i class="fas fa-credit-card"></i></div>
                     <h3>Оплатите</h3>
-                    <p>Следуйте инструкциям бота для завершения оплаты</p>
+                    <p>Следуйте инструкциям бота для оплаты</p>
                 </div>
                 <div class="step">
-                    <div class="step-number">4</div>
-                    <i class="fas fa-star"></i>
-                    <h3>Получите звёзды</h3>
-                    <p>Звёзды будут добавлены к вашему аккаунту мгновенно</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="about" id="about">
-            <h2>О звёздах в Telegram</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Звёзды - это внутренняя валюта Telegram, которую можно использовать для поддержки авторов, покупки товаров или отправки подарков.</p>
-                    <p>Наш сервис предоставляет удобный способ приобретения звёзд через безопасного Telegram бота.</p>
-                </div>
-                <div class="about-image">
-                    <i class="fas fa-shield-alt"></i>
-                    <p>Безопасные платежи</p>
+                    <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+                    <h3>Получите</h3>
+                    <p>Звёзды будут добавлены мгновенно</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer id="contact">
+    <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Контакты</h3>
-                <p>По всем вопросам пишите в наш Telegram бот</p>
+                <h3>Telegram Stars</h3>
+                <p>Сервис для покупки звёзд и премиум подписок в Telegram</p>
             </div>
             <div class="footer-section">
-                <h3>Telegram</h3>
-                <a href="https://t.me/your_bot_username" class="telegram-link">
+                <h3>Контакты</h3>
+                <a href="https://t.me/vtorie_bot" class="telegram-link">
                     <i class="fab fa-telegram"></i> @vtorie_bot
                 </a>
             </div>
         </div>
-        <div class="copyright">
+        <div class="footer-bottom">
             <p>&copy; 2025 Telegram Stars. Все права защищены.</p>
         </div>
     </footer>
