@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Обработчики кнопок
-    const buyButtons = document.querySelectorAll('.buy-button, .cta-button');
-    const telegramBotUrl = 'https://t.me/vtorie_bot';
+    const buyButtons = document.querySelectorAll('.buy-btn');
+    const telegramBotUrl = 'https://t.me/vtorie_bot'; // Замените на ваш URL
     
     buyButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -12,24 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Перенаправление в Telegram
                 window.open(telegramBotUrl, '_blank');
             }, 200);
-        });
-    });
-    
-    // Плавная прокрутка
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
         });
     });
 });
