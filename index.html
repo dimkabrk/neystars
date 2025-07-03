@@ -1,111 +1,49 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-     <!-- Подключаем шрифты -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StarsTg | Купить звёзды</title>
+    <title>StarsTG | Telegram Premium</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Unica+One&display=swap">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-     <!-- Подключаем шрифты -->
-  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/correction-brush">
-  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/salma-pro">
 </head>
 <body>
-    <div class="telegram-background"></div>
+    <div class="stars-bg"></div>
     
-<header>
-    <div class="logo">
-        <i class="fas fa-star gold-star pulse"></i>
-        <span> StarsTg</span>
-    </div>
-    <nav>
-        <a href="#products">Звёзды</a>
-        <a href="#premium">Премиум</a>
-        <a href="#gifts">Подарки</a>
-        <a href="#how-it-works">Как купить</a>
-    </nav>
-</header>
+    <header class="glass">
+        <div class="logo">
+            <span class="logo-icon">✧</span>
+            <span> StarsTG</span>
+        </div>
+        <nav>
+            <a href="#buy">Купить</a>
+            <a href="#premium">Премиум</a>
+            <a href="#gifts">Подарки</a>
+        </nav>
+    </header>
 
     <main>
         <section class="hero">
-            <div class="hero-content">
-                <h1>Купить звёзды Telegram</h1>
-                <p>По самой выгодной цене с быстрой доставкой</p>
-                <div class="cta-buttons">
-                    <div class="cta-button" id="buyStarsBtn">Купить звёзды</div>
-                    <div class="cta-button secondary" id="buyPremiumBtn">Купить премиум</div>
+            <h1>PREMIUM <span>STARS</span></h1>
+            <p class="subtitle">Быстрая доставка звёзд в Telegram</p>
+            <div class="cta-grid">
+                <div class="price-card glass">
+                    <div class="amount">13</div>
+                    <div class="price">25₽</div>
+                    <button class="buy-btn">Купить</button>
                 </div>
-            </div>
-        </section>
-
-        <section class="products" id="products">
-            <h2>Выберите количество звёзд</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-badge">Популярный</div>
-                    <div class="product-stars">13 звёзд</div>
-                    <div class="product-price">25₽</div>
-                    <div class="buy-button">Купить</div>
-                </div>
-                <div class="product-card">
-                    <div class="product-stars">25 звёзд</div>
-                    <div class="product-price">50₽</div>
-                    <div class="buy-button">Купить</div>
-                </div>
-                <div class="product-card">
-                    <div class="product-stars">50 звёзд</div>
-                    <div class="product-price">84₽</div>
-                    <div class="buy-button">Купить</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="how-it-works" id="how-it-works">
-            <h2>Как это работает</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-icon"><i class="fas fa-mouse-pointer"></i></div>
-                    <h3>Выберите товар</h3>
-                    <p>Укажите количество звёзд или премиум</p>
-                </div>
-                <div class="step">
-                    <div class="step-icon"><i class="fas fa-robot"></i></div>
-                    <h3>Перейдите в бота</h3>
-                    <p>Нажмите кнопку "Купить" для перехода в Telegram</p>
-                </div>
-                <div class="step">
-                    <div class="step-icon"><i class="fas fa-credit-card"></i></div>
-                    <h3>Оплатите</h3>
-                    <p>Ожидайте получения</p>
-                </div>
-                <div class="step">
-                    <div class="step-icon"><i class="fas fa-check-circle"></i></div>
-                    <h3>Получите</h3>
-                    <p>Звёзды будут отправлены через пару минут</p>
+                <div class="price-card glass accent">
+                    <div class="amount">50</div>
+                    <div class="price">84₽</div>
+                    <button class="buy-btn">Купить</button>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>StarsTgs</h3>
-                <p>Сервис для покупки звёзд и премиум подписок в Telegram</p>
-            </div>
-            <div class="footer-section">
-                <h3>Контакты</h3>
-                <a href="https://t.me/vtorie_bot" class="telegram-link">
-                    <i class="fab fa-telegram"></i> @vtorie_bot
-                </a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 StarsTg. Все права защищены.</p>
-        </div>
+    <footer class="glass">
+        <p>© 2024 StarsTG</p>
+        <a href="https://t.me/" class="tg-link">@скоро</a>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
