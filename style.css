@@ -81,51 +81,48 @@ h1 {
   text-transform: uppercase;
   margin-bottom: 1rem;
   letter-spacing: 2px;
+  background: linear-gradient(45deg, #ffd700, #ffcc00, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 h1 span {
-  color: var(--accent);
+  background: inherit;
+  -webkit-background-clip: inherit;
+  background-clip: inherit;
+  -webkit-text-fill-color: inherit;
 }
 
-.subtitle {
-  font-size: 1.25rem;
-  opacity: 0.8;
-  margin-bottom: 3rem;
-  font-weight: 400;
+/* Более круглые рамки */
+.glass,
+.price-card,
+.buy-btn {
+  border-radius: 16px !important;
 }
 
-/* Сетка карточек */
-.cta-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-/* Стили карточек */
 .price-card {
-  padding: 2rem;
-  text-align: center;
-  transition: all 0.3s ease;
-  position: relative;
-  border-radius: 12px;
+  border-radius: 20px !important;
+  overflow: hidden;
 }
 
-/* Обводка при наведении */
+/* Градиентная обводка */
 .price-card:hover {
-  box-shadow: 0 0 0 2px var(--accent), 
-              0 0 20px rgba(255, 215, 0, 0.3);
-  transform: translateY(-5px);
+  position: relative;
 }
 
-.price-card.accent {
-  border: 1px solid var(--accent);
-}
-
-.price-card.accent:hover {
-  box-shadow: 0 0 0 3px var(--accent), 
-              0 0 25px rgba(255, 215, 0, 0.4);
+.price-card:hover::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ffd700, #ffcc00, #ffffff);
+  border-radius: 22px;
+  z-index: -1;
+  opacity: 0.5;
 }
 
 /* Содержимое карточек */
