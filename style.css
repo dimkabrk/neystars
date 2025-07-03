@@ -1,25 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Russo+One&display=swap');
+
 /* Основные стили */
 :root {
     --primary-color: #0088cc;
     --secondary-color: #6c5ce7;
-    --accent-color: #00b894;
+    --accent-color: #FFD700; /* Золотой цвет */
     --text-color: #ffffff;
     --light-text: #f5f6fa;
     --dark-bg: #1e1e2f;
     --card-bg: rgba(255, 255, 255, 0.1);
+    --main-font: 'Russo One', sans-serif;
+    --secondary-font: 'Orbitron', sans-serif;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--main-font);
 }
 
 body {
     color: var(--text-color);
     overflow-x: hidden;
     position: relative;
+    background-color: var(--dark-bg);
+}
+
+/* Анимации */
+@keyframes pulse-gold {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 /* Telegram-подобный фон */
@@ -46,19 +63,27 @@ header {
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 .logo {
     display: flex;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-.logo i {
-    color: var(--primary-color);
+.gold-star {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
     font-size: 2rem;
     margin-right: 10px;
+}
+
+.pulse {
+    animation: pulse-gold 2s infinite;
 }
 
 nav a {
@@ -66,12 +91,32 @@ nav a {
     text-decoration: none;
     color: var(--light-text);
     font-weight: 500;
-    transition: color 0.3s;
+    transition: all 0.3s;
     position: relative;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s;
 }
 
 nav a:hover {
-    color: var(--primary-color);
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+nav a:hover::after {
+    width: 100%;
 }
 
 /* Основное содержимое */
@@ -86,6 +131,30 @@ section {
 
 h1, h2, h3 {
     margin-bottom: 20px;
+    font-family: var(--main-font);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 3.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    opacity: 0.9;
 }
 
 /* Герой секция */
@@ -102,14 +171,20 @@ h1, h2, h3 {
 }
 
 .hero-content h1 {
-    font-size: 3.5rem;
+    font-size: 4rem;
     line-height: 1.2;
+    margin-bottom: 30px;
+    background: linear-gradient(to right, #ffffff, var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero-content p {
     font-size: 1.3rem;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     opacity: 0.9;
+    font-family: var(--secondary-font);
+    letter-spacing: 1px;
 }
 
 .cta-buttons {
@@ -131,6 +206,27 @@ h1, h2, h3 {
     border: none;
     font-size: 1.1rem;
     box-shadow: 0 5px 15px rgba(0, 136, 204, 0.4);
+    font-family: var(--main-font);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 2px solid var(--accent-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.cta-button:hover::before {
+    left: 100%;
 }
 
 .cta-button.secondary {
@@ -159,7 +255,7 @@ h1, h2, h3 {
     backdrop-filter: blur(10px);
     border-radius: 15px;
     padding: 30px;
-    transition: transform 0.3s;
+    transition: all 0.3s;
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -167,6 +263,7 @@ h1, h2, h3 {
 .product-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: var(--accent-color);
 }
 
 .product-badge {
@@ -174,24 +271,28 @@ h1, h2, h3 {
     top: -10px;
     right: 20px;
     background: var(--accent-color);
-    color: white;
+    color: #000;
     padding: 5px 15px;
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: bold;
+    font-family: var(--secondary-font);
 }
 
 .product-stars {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 10px;
-    color: var(--primary-color);
+    color: var(--accent-color);
+    font-family: var(--secondary-font);
+    letter-spacing: 2px;
 }
 
 .product-price {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin: 20px 0;
     font-weight: bold;
+    font-family: var(--secondary-font);
 }
 
 .buy-button {
@@ -203,10 +304,14 @@ h1, h2, h3 {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--accent-color);
 }
 
 .buy-button:hover {
     background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    transform: translateY(-3px);
 }
 
 /* Как это работает */
@@ -226,17 +331,18 @@ h1, h2, h3 {
     backdrop-filter: blur(10px);
     padding: 30px;
     border-radius: 15px;
-    transition: transform 0.3s;
+    transition: all 0.3s;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .step:hover {
     transform: translateY(-10px);
+    border-color: var(--accent-color);
 }
 
 .step-icon {
     font-size: 2.5rem;
-    color: var(--primary-color);
+    color: var(--accent-color);
     margin-bottom: 20px;
 }
 
@@ -255,6 +361,7 @@ footer {
     background: var(--dark-bg);
     padding: 60px 5% 20px;
     margin-top: 60px;
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 .footer-content {
@@ -265,7 +372,7 @@ footer {
 }
 
 .footer-section h3 {
-    color: var(--primary-color);
+    color: var(--accent-color);
     margin-bottom: 20px;
     font-size: 1.3rem;
 }
@@ -282,7 +389,8 @@ footer {
     color: white;
     text-decoration: none;
     font-size: 1.1rem;
-    transition: color 0.3s;
+    transition: all 0.3s;
+    font-family: var(--secondary-font);
 }
 
 .telegram-link i {
@@ -292,7 +400,8 @@ footer {
 }
 
 .telegram-link:hover {
-    color: var(--primary-color);
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 .footer-bottom {
@@ -300,6 +409,8 @@ footer {
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     opacity: 0.7;
+    font-family: var(--secondary-font);
+    letter-spacing: 1px;
 }
 
 /* Адаптивность */
@@ -311,10 +422,13 @@ footer {
 
     nav {
         margin-top: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     nav a {
-        margin: 0 10px;
+        margin: 5px 10px;
     }
 
     .hero-content h1 {
@@ -329,4 +443,32 @@ footer {
     .cta-button {
         width: 100%;
     }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Специальные эффекты */
+::selection {
+    background: var(--accent-color);
+    color: #000;
+}
+
+/* Кастомный скроллбар */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ffc800;
 }
