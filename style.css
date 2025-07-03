@@ -103,83 +103,29 @@ h1 span {
   margin: 0 auto;
 }
 
-/* Стили карточек с анимацией */
+/* Стили карточек */
 .price-card {
   padding: 2rem;
   text-align: center;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
-  z-index: 1;
+  border-radius: 12px;
 }
 
-.price-card::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  z-index: -1;
-  background: linear-gradient(45deg, 
-    #ffd700, #ffcc00, #ffbb00, #ffaa00, 
-    #ff9900, #ffaa00, #ffbb00, #ffcc00, #ffd700);
-  background-size: 300% 300%;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  border-radius: 14px;
-  filter: blur(6px);
-  animation: rotateGradient 3.5s linear infinite;
-}
-
+/* Обводка при наведении */
 .price-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(255, 215, 0, 0.25);
-}
-
-.price-card:hover::before {
-  opacity: 0.6;
+  box-shadow: 0 0 0 2px var(--accent), 
+              0 0 20px rgba(255, 215, 0, 0.3);
+  transform: translateY(-5px);
 }
 
 .price-card.accent {
   border: 1px solid var(--accent);
 }
 
-.price-card.accent::before {
-  opacity: 0.2;
-}
-
-.price-card.accent:hover::before {
-  opacity: 0.7;
-}
-
-.price-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 12px;
-  padding: 2px;
-  background: linear-gradient(45deg, 
-    rgba(255, 215, 0, 0.8), 
-    rgba(255, 255, 255, 0.6), 
-    rgba(255, 215, 0, 0.8));
-  background-size: 200% 200%;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  animation: rotateGradient 2.5s linear infinite;
-}
-
-.price-card:hover::after {
-  opacity: 1;
+.price-card.accent:hover {
+  box-shadow: 0 0 0 3px var(--accent), 
+              0 0 25px rgba(255, 215, 0, 0.4);
 }
 
 /* Содержимое карточек */
@@ -224,24 +170,11 @@ h1 span {
   font-size: 1.1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
 }
 
 .buy-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-}
-
-/* Анимация градиента */
-@keyframes rotateGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 200% 50%;
-  }
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
 }
 
 /* Подвал */
