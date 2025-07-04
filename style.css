@@ -572,3 +572,103 @@ h1 span {
         grid-template-columns: 1fr;
     }
 }
+
+/* Стили для выпадающего списка пакетов */
+.package-select {
+  position: relative;
+  margin-bottom: 2rem;
+  z-index: 5;
+}
+
+.select-header {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.select-header:hover {
+  border-color: rgba(255, 215, 0, 0.4);
+  background: rgba(255, 215, 0, 0.03);
+}
+
+.arrow {
+  color: var(--accent);
+  font-size: 0.8rem;
+  transition: transform 0.3s;
+}
+
+.select-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(15, 15, 26, 0.95);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.select-options.active {
+  max-height: 500px;
+}
+
+.option {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.option:last-child {
+  border-bottom: none;
+}
+
+.option:hover {
+  background: rgba(255, 215, 0, 0.08);
+}
+
+.option .stars {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.option .price {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.selected-price {
+  color: var(--accent);
+  margin-left: 0.5rem;
+  font-weight: 600;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 600px) {
+  .select-header {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .option {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .select-options {
+    border-radius: 0 0 6px 6px;
+  }
+}
