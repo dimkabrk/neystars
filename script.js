@@ -1,6 +1,6 @@
 // Анимация счетчиков
 function animateCounters() {
-    const counters = document.querySelectorAll('.stat-value');
+    const counters = document.querySelectorAll('.stats-grid .stat-value');
     const speed = 200;
     
     counters.forEach(counter => {
