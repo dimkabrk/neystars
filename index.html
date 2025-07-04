@@ -46,41 +46,39 @@
             </div>
         </section>
 
-      <section class="reviews-section glass">
-    <h2>Отзывы клиентов</h2>
+     
+      
+<div style="display: flex; justify-content: center;margin-top: 20px;border-radius: 20px;">
+    <iframe style="width: 100%; height: 100%; max-width: 1170px; border: none; outline: none; padding: 0; margin: 0" id="myReviews__block-widget">
+    </iframe>
+</div>
+
+
+      
+<script src="https://myreviews.dev/widget/dist/index.js" defer></script>
+<script>
+    (function (){
+      var myReviewsInit = function () {
+        new window.myReviews.BlockWidget({
+        uuid: "32934635-7c51-42e8-9678-f7ed72c1a404",
+        name: "g2418631",
+        additionalFrame:"none",
+        lang:"ru",
+        widgetId: "1"
+        }).init();
+
+      };
+    if (document.readyState === "loading") {
+      document.addEventListener('DOMContentLoaded', function () {
+          myReviewsInit()
+      })
+    } else {
+      myReviewsInit()
+    }
+    })()
+</script>
+  
     
-    <div class="reviews-slider">
-        <button class="slider-arrow prev">❮</button>
-        
-        <div class="reviews-container">
-            <div class="review-card active">
-                <div class="review-header">
-                    <div class="review-author">Алексей К.</div>
-                    <div class="review-stars">★★★★★</div>
-                </div>
-                <p class="review-text">Заказывал звёзды несколько раз - всё моментально и без проблем. Рекомендую!</p>
-            </div>
-            
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="review-author">Марина С.</div>
-                    <div class="review-stars">★★★★☆</div>
-                </div>
-                <p class="review-text">Удобный сервис, но хотелось бы больше способов оплаты.</p>
-            </div>
-            
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="review-author">Дмитрий П.</div>
-                    <div class="review-stars">★★★★★</div>
-                </div>
-                <p class="review-text">Лучший сервис по покупке звёзд! Пользуюсь регулярно.</p>
-            </div>
-        </div>
-        
-        <button class="slider-arrow next">❯</button>
-    </div>
-</section>
         
         <!-- Обновленный раздел: О нас -->
         <section class="about-section">
