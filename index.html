@@ -115,138 +115,81 @@
             </div>
         </section>
 
-        <section class="purchase-section glass">
-  <div class="purchase-header">
+       <section class="order-section glass">
+  <div class="order-header">
     <h2>Покупайте звёзды Telegram по выгодному курсу</h2>
-    <p>Мы продаём звёзды без комиссии, поэтому держим минимальную цену для наших пользователей</p>
+    <p>Мгновенная доставка звёзд после оплаты через СБП</p>
   </div>
 
-  <div class="packages-grid">
-    <!-- Пакет 1 -->
-    <div class="package-card">
-      <div class="package-header">
-        <h3>Базовый пакет</h3>
-      </div>
-      <div class="package-content">
-        <div class="stars-count">13 звёзд</div>
-        <div class="package-price">25 ₽</div>
-        <button class="select-btn" data-stars="13" data-price="25">Выбрать</button>
-      </div>
+  <div class="user-input">
+    <label for="telegram-username">Ваш Telegram @username</label>
+    <input type="text" id="telegram-username" placeholder="@username" required>
+  </div>
+
+  <div class="packages-list">
+    <div class="package-option">
+      <label class="package-radio">
+        <input type="radio" name="package" data-stars="13" data-price="25" checked>
+        <span class="radio-custom"></span>
+        <span class="package-name">13 звёзд</span>
+        <span class="package-price">25 ₽</span>
+      </label>
     </div>
 
-    <!-- Пакет 2 -->
-    <div class="package-card">
-      <div class="package-header">
-        <h3>Популярный</h3>
-      </div>
-      <div class="package-content">
-        <div class="stars-count">50 звёзд</div>
-        <div class="package-price">84 ₽</div>
-        <button class="select-btn" data-stars="50" data-price="84">Выбрать</button>
-      </div>
+    <div class="package-option">
+      <label class="package-radio">
+        <input type="radio" name="package" data-stars="50" data-price="84">
+        <span class="radio-custom"></span>
+        <span class="package-name">50 звёзд</span>
+        <span class="package-price">84 ₽</span>
+      </label>
     </div>
 
-    <!-- Пакет 3 -->
-    <div class="package-card">
-      <div class="package-header">
-        <h3>Максимум</h3>
-      </div>
-      <div class="package-content">
-        <div class="stars-count">100 звёзд</div>
-        <div class="package-price">169 ₽</div>
-        <button class="select-btn" data-stars="100" data-price="169">Выбрать</button>
-      </div>
+    <div class="package-option">
+      <label class="package-radio">
+        <input type="radio" name="package" data-stars="100" data-price="169">
+        <span class="radio-custom"></span>
+        <span class="package-name">100 звёзд</span>
+        <span class="package-price">169 ₽</span>
+      </label>
     </div>
   </div>
 
-  <!-- Форма заявки -->
-  <div class="order-form glass" id="orderForm" style="display: none;">
-    <h3>Оформление заявки</h3>
-    <form id="purchaseForm">
-      <div class="form-group">
-        <label for="username">Ваш Telegram @username</label>
-        <input type="text" id="username" required placeholder="например, @ivanov">
-      </div>
-      <div class="form-group">
-        <label for="email">Email для связи</label>
-        <input type="email" id="email" required placeholder="ваш@email.com">
-      </div>
-      <div class="form-group">
-        <label>Выбранный пакет</label>
-        <div class="selected-package" id="selectedPackage"></div>
-      </div>
-      <div class="payment-methods">
-        <button type="button" class="payment-btn sbp-btn" id="sbpBtn">Оплатить через СБП</button>
-        <button type="button" class="payment-btn card-btn" id="cardBtn">Оплатить картой</button>
-      </div>
-    </form>
-  </div>
+  <button class="payment-btn sbp-btn" id="submitOrder">Оплатить через СБП</button>
 </section>
 
 <script>
-  // Google Sheets ID и API
   const scriptURL = 'https://script.google.com/macros/s/AKfycbwCPheD8AE6tQEkHddt6El2zhyQv_t3p93Rh2X1t8IXXahWHRMzHHW6-VZ3NGlGvbQZ/exec';
   
   document.addEventListener('DOMContentLoaded', function() {
-    const selectBtns = document.querySelectorAll('.select-btn');
-    const orderForm = document.getElementById('orderForm');
-    const selectedPackage = document.getElementById('selectedPackage');
-    const purchaseForm = document.getElementById('purchaseForm');
-    const sbpBtn = document.getElementById('sbpBtn');
-    const cardBtn = document.getElementById('cardBtn');
+    const submitBtn = document.getElementById('submitOrder');
     
-    let currentPackage = {};
-    
-    // Обработка выбора пакета
-    selectBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
-        currentPackage = {
-          stars: this.getAttribute('data-stars'),
-          price: this.getAttribute('data-price')
-        };
-        
-        selectedPackage.innerHTML = `
-          ${this.parentElement.querySelector('h3').textContent}: 
-          ${currentPackage.stars} звёзд за ${currentPackage.price} ₽
-        `;
-        
-        orderForm.style.display = 'block';
-        window.scrollTo({
-          top: orderForm.offsetTop - 100,
-          behavior: 'smooth'
-        });
-      });
-    });
-    
-    // Отправка формы в Google Sheets
-    purchaseForm.addEventListener('submit', function(e) {
-      e.preventDefault();
+    submitBtn.addEventListener('click', function() {
+      const username = document.getElementById('telegram-username').value.trim();
+      const package = document.querySelector('input[name="package"]:checked');
+      
+      if (!username.startsWith('@')) {
+        alert('Пожалуйста, введите корректный Telegram @username');
+        return;
+      }
       
       const formData = new FormData();
-      formData.append('username', document.getElementById('username').value);
-      formData.append('email', document.getElementById('email').value);
-      formData.append('package', selectedPackage.textContent);
       formData.append('date', new Date().toLocaleString());
+      formData.append('username', username);
+      formData.append('package', package.dataset.stars + ' звёзд за ' + package.dataset.price + ' ₽');
       
-      fetch(scriptURL, { method: 'POST', body: formData })
-        .then(response => {
-          alert('Заявка отправлена! Мы свяжемся с вами в Telegram.');
-          purchaseForm.reset();
-          orderForm.style.display = 'none';
-        })
-        .catch(error => console.error('Error!', error.message));
-    });
-    
-    // Кнопки оплаты
-    sbpBtn.addEventListener('click', function() {
-      window.open(`https://sbp.nspk.ru/transfer?amount=${currentPackage.price}`, '_blank');
-      purchaseForm.dispatchEvent(new Event('submit'));
-    });
-    
-    cardBtn.addEventListener('click', function() {
-      // Здесь можно добавить ссылку на оплату картой
-      alert('После нажатия ОК вы будете перенаправлены на страницу оплаты');
-      purchaseForm.dispatchEvent(new Event('submit'));
+      fetch(scriptURL, { 
+        method: 'POST', 
+        body: formData 
+      })
+      .then(response => {
+        alert('Заявка принята! Оплатите ' + package.dataset.price + ' ₽ по СБП и звёзды будут зачислены.');
+        window.open('https://sbp.nspk.ru/transfer?amount=' + package.dataset.price, '_blank');
+      })
+      .catch(error => {
+        console.error('Error!', error.message);
+        alert('Ошибка при отправке заявки');
+      });
     });
   });
 </script>
