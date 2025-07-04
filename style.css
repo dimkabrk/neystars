@@ -259,6 +259,38 @@ input.error {
   box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
 }
 
+/* Инструкция к заказу */
+
+.payment-notice {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 215, 0, 0.1);
+    border-left: 3px solid var(--accent);
+    padding: 12px 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.notice-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: var(--dark);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.payment-notice p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
 /* Подвал */
 .footer-content {
   max-width: 800px;
