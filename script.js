@@ -10,8 +10,16 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 this.style.transform = 'scale(1)';
                 // Здесь добавьте ссылку на ваш Telegram бот
-                window.open('https://t.me/your_bot', '_blank');
+                window.open('https://t.me/', '_blank');
             }, 200);
+        });
+    });
+
+    // Дополнительная анимация для карточек отзывов и фич
+    const cards = document.querySelectorAll('.review-card, .feature');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transition = 'all 0.3s ease';
         });
     });
 });
