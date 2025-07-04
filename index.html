@@ -46,64 +46,42 @@
             </div>
         </section>
 
-        <!-- Новый раздел: Отзывы -->
-        <section class="reviews-section glass">
-            <h2>Отзывы наших клиентов</h2>
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-author">Алексей К.</div>
-                        <div class="review-stars">★★★★★</div>
-                    </div>
-                    <p class="review-text">Заказал 50 звёзд, пришли моментально! Очень удобный сервис, буду пользоваться ещё.</p>
-                </div>
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-author">Марина С.</div>
-                        <div class="review-stars">★★★★☆</div>
-                    </div>
-                    <p class="review-text">Быстрая доставка, но хотелось бы больше вариантов оплаты. В целом довольна.</p>
-                </div>
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-author">Дмитрий П.</div>
-                        <div class="review-stars">★★★★★</div>
-                    </div>
-                    <p class="review-text">Лучший сервис по покупке звёзд! Пользуюсь регулярно, всегда всё чётко и быстро.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="reviews-section glass">
-    <h2>Отзывы наших клиентов</h2>
+      <section class="reviews-section glass">
+    <h2>Отзывы клиентов</h2>
     
-    <button id="open-review-btn" class="review-btn glass">✧ Оставить отзыв ✧</button>
-    
-    <div class="reviews-grid" id="reviews-container">
-        <!-- Отзывы будут загружаться здесь -->
-    </div>
-
-    <!-- Модальное окно для отзыва -->
-    <div id="review-modal" class="modal glass">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h3>Ваш отзыв</h3>
-            
-            <div class="rating-stars">
-                <span class="star" data-value="1">☆</span>
-                <span class="star" data-value="2">☆</span>
-                <span class="star" data-value="3">☆</span>
-                <span class="star" data-value="4">☆</span>
-                <span class="star" data-value="5">☆</span>
+    <div class="reviews-slider">
+        <button class="slider-arrow prev">❮</button>
+        
+        <div class="reviews-container">
+            <div class="review-card active">
+                <div class="review-header">
+                    <div class="review-author">Алексей К.</div>
+                    <div class="review-stars">★★★★★</div>
+                </div>
+                <p class="review-text">Заказывал звёзды несколько раз - всё моментально и без проблем. Рекомендую!</p>
             </div>
             
-            <textarea id="review-text" placeholder="Расскажите о вашем опыте..." rows="5"></textarea>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-author">Марина С.</div>
+                    <div class="review-stars">★★★★☆</div>
+                </div>
+                <p class="review-text">Удобный сервис, но хотелось бы больше способов оплаты.</p>
+            </div>
             
-            <button id="submit-review" class="review-btn">Отправить на проверку</button>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-author">Дмитрий П.</div>
+                    <div class="review-stars">★★★★★</div>
+                </div>
+                <p class="review-text">Лучший сервис по покупке звёзд! Пользуюсь регулярно.</p>
+            </div>
         </div>
+        
+        <button class="slider-arrow next">❯</button>
     </div>
 </section>
-
+        
         <!-- Обновленный раздел: О нас -->
         <section class="about-section">
             <div class="glass about-container">
