@@ -178,57 +178,97 @@ h1 span {
 }
 
 /* Подвал */
-/* Стили для футера */
-.footer-content {
+/* Футер */
+.footer-glass {
+    background: rgba(15, 15, 26, 0.7);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
+    padding: 2rem 0;
+    margin-top: 4rem;
+}
+
+.footer-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1.5rem;
+    padding: 0 2rem;
     text-align: center;
 }
 
-.footer-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1.5rem 0;
+.footer-motto {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
 }
 
-.footer-btn {
-    background: transparent;
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-link {
     color: var(--light);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 0.5rem 1.5rem;
-    border-radius: 20px;
-    font-family: var(--main-font);
+    text-decoration: none;
     font-size: 0.9rem;
-    cursor: pointer;
+    position: relative;
+    padding: 0.3rem 0;
     transition: all 0.3s ease;
 }
 
-.footer-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--accent);
+.footer-link:hover {
     color: var(--accent);
 }
 
-.copyright {
+.footer-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.footer-link:hover::after {
+    width: 100%;
+}
+
+.link-divider {
+    color: rgba(255, 255, 255, 0.2);
     font-size: 0.9rem;
-    opacity: 0.7;
-    margin-top: 1rem;
+}
+
+.footer-copyright {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
 }
 
 /* Адаптивность */
-@media (max-width: 480px) {
-    .footer-buttons {
-        flex-direction: column;
-        gap: 0.5rem;
+@media (max-width: 768px) {
+    .footer-glass {
+        padding: 1.5rem 0;
     }
     
-    .footer-btn {
-        width: 100%;
-        padding: 0.7rem;
+    .footer-motto {
+        font-size: 0.9rem;
+    }
+    
+    .footer-links {
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+    }
+    
+    .link-divider {
+        display: none;
     }
 }
+
 @media (max-width: 768px) {
   h1 {
     font-size: 2.5rem;
