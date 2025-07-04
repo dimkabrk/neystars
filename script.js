@@ -54,26 +54,26 @@ document.addEventListener('DOMContentLoaded', function() {
   purchaseForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    // Получаем текущую дату и время
-    const now = new Date();
-    const timestamp = now.toLocaleString('ru-RU', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    });
-
-    // Валидация
     const username = usernameInput.value.trim();
+    const usernameError = document.getElementById('usernameError');
+    
+    // Сбрасываем ошибки
+    usernameInput.classList.remove('error');
+    usernameError.style.display = 'none';
+    
+    // Валидация
     if (!username) {
-      showAlert('Пожалуйста, введите ваш Telegram username');
+      showInputError(usernameInput, usernameError, 'Пожалуйста, введите ваш Telegram username');
       return;
     }
 
     if (!username.startsWith('@')) {
-      showAlert('Username должен начинаться с @');
+      showInputError(usernameInput, usernameError, 'Username должен начинаться с @');
+      return;
+    }
+
+    if (username.length < 5) {
+      showInputError(usernameInput, usernameError, 'Username слишком короткий');
       return;
     }
 
@@ -128,16 +128,41 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // Функция показа уведомлений
-  function showAlert(message, type = 'error') {
-    const alertBox = document.createElement('div');
-    alertBox.className = `alert-box ${type}`;
-    alertBox.textContent = message;
-    
-    document.body.appendChild(alertBox);
-    
-    setTimeout(() => {
-      alertBox.classList.add('fade-out');
-      setTimeout(() => alertBox.remove(), 300);
-    }, 3000);
+ // Функция для показа ошибки в поле ввода
+  function showInputError(inputElement, errorElement, message) {
+    inputElement.classList.add('error');
+    errorElement.textContent = message;
+    errorElement.style.display = 'block';
+    inputElement.focus();
   }
+
+  // Создаем мерцающие звёзды на фоне
+  createStars();
 });
+
+// Создание анимированных звёзд
+function createStars() {
+  const starsBg = document.querySelector('.stars-bg');
+  const starCount = 20;
+  
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement('div');
+    star.className = 'large-star';
+    
+    // Случайные параметры для звёзд
+    const size = Math.random() * 3 + 1;
+    const posX = Math.random() * 100;
+    const posY = Math.random() * 100;
+    const delay = Math.random() * 5;
+    const duration = Math.random() * 3 + 3;
+    
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+    star.style.left = `${posX}%`;
+    star.style.top = `${posY}%`;
+    star.style.animationDelay = `${delay}s`;
+    star.style.animationDuration = `${duration}s`;
+    
+    starsBg.appendChild(star);
+  }
+}
