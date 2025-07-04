@@ -288,115 +288,21 @@ h1 span {
   }
 }
 
-/* Стили для раздела отзывов */
-.reviews-section {
-    max-width: 1200px;
-    margin: 4rem auto;
-    padding: 0 2rem;
-}
-
-.reviews-section h2 {
-    font-family: var(--accent-font);
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 3rem;
-    color: var(--accent);
-    position: relative;
-}
-
-.reviews-section h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 2px;
-    background: var(--accent);
-}
-
-.reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-}
-
-.review-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 215, 0, 0.15);
+.reviews-widget {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.2);
     border-radius: 16px;
-    padding: 2rem;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
 }
 
-.review-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, transparent 100%);
-    z-index: -1;
-}
-
-.review-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
-    border-color: rgba(255, 215, 0, 0.3);
-}
-
-.review-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.review-author {
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--light);
-}
-
-.review-stars {
-    color: var(--accent);
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-}
-
-.review-text {
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1rem;
-    position: relative;
-    padding-left: 1rem;
-}
-
-.review-text::before {
-    content: '“';
-    position: absolute;
-    left: -5px;
-    top: -10px;
-    font-size: 2rem;
-    color: rgba(255, 215, 0, 0.3);
-    font-family: Georgia, serif;
-}
-
-/* Адаптивность */
 @media (max-width: 768px) {
-    .reviews-section h2 {
-        font-size: 2rem;
-    }
-    
-    .reviews-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .review-card {
+    .reviews-widget {
+        margin: 2rem auto;
         padding: 1.5rem;
+    }
+    
+    .reviews-widget h2 {
+        font-size: 2rem;
     }
 }
 
