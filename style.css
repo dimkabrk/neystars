@@ -205,3 +205,131 @@ footer {
     padding: 1.5rem;
   }
 }
+
+/* Новые стили для разделов "Отзывы" и "О нас" */
+section {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding: 2rem;
+}
+
+h2 {
+    font-family: var(--accent-font);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--accent);
+}
+
+/* Стили для раздела отзывов */
+.reviews-section {
+    margin-top: 4rem;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.review-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.1);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.review-author {
+    font-weight: 600;
+}
+
+.review-stars {
+    color: var(--accent);
+    font-size: 1.2rem;
+}
+
+.review-text {
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Стили для раздела "О нас" */
+.about-section {
+    margin-top: 2rem;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    line-height: 1.7;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.feature:hover {
+    background: rgba(255, 255, 255, 0.07);
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+}
+
+.feature h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.feature p {
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+/* Адаптивность для новых разделов */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+}
