@@ -32,58 +32,44 @@
             </div>
         </section>
         
-       <section id="purchase" class="purchase-section glass">
-    <h2>Выберите пакет звёзд</h2>
-    
-    <div class="package-list">
-        <div class="package-item">
-            <div class="package-info">
-                <span class="stars-count">50 звёзд</span>
-                <span class="stars-price">78 ₽</span>
+        <section id="purchase" class="purchase-section glass">
+            <h2>Выберите пакет звёзд</h2>
+            
+            <div class="package-list">
+                <div class="package-item">
+                    <div class="package-info">
+                        <span class="stars-count">50 звёзд</span>
+                        <span class="stars-price">78 ₽</span>
+                    </div>
+                    <button class="buy-btn" data-stars="50" data-price="78">Выбрать</button>
+                </div>
+                
+                <div class="package-item">
+                    <div class="package-info">
+                        <span class="stars-count">75 звёзд</span>
+                        <span class="stars-price">116 ₽</span>
+                    </div>
+                    <button class="buy-btn" data-stars="75" data-price="116">Выбрать</button>
+                </div>
+                
+                <div class="package-item">
+                    <div class="package-info">
+                        <span class="stars-count">500 звёзд</span>
+                        <span class="stars-price">771 ₽</span>
+                    </div>
+                    <button class="buy-btn" data-stars="500" data-price="771">Выбрать</button>
+                </div>
+                
+                <div class="package-item">
+                    <div class="package-info">
+                        <span class="stars-count">2,500 звёзд</span>
+                        <span class="stars-price">3,851 ₽</span>
+                    </div>
+                    <button class="buy-btn" data-stars="2500" data-price="3851">Выбрать</button>
+                </div>
             </div>
-            <button class="buy-btn" data-stars="50" data-price="78">Выбрать</button>
-        </div>
-        
-        <div class="package-item">
-            <div class="package-info">
-                <span class="stars-count">75 звёзд</span>
-                <span class="stars-price">116 ₽</span>
-            </div>
-            <button class="buy-btn" data-stars="75" data-price="116">Выбрать</button>
-        </div>
-        
-        <div class="package-item">
-            <div class="package-info">
-                <span class="stars-count">500 звёзд</span>
-                <span class="stars-price">771 ₽</span>
-            </div>
-            <button class="buy-btn" data-stars="500" data-price="771">Выбрать</button>
-        </div>
-        
-        <div class="package-item">
-            <div class="package-info">
-                <span class="stars-count">2,500 звёзд</span>
-                <span class="stars-price">3,851 ₽</span>
-            </div>
-            <button class="buy-btn" data-stars="2500" data-price="3851">Выбрать</button>
-        </div>
-    </div>
-    
-    <p class="footer-note">NeyStar — делаем процесс поддержки создателей быстрым, безопасным и приятным.</p>
-    
-    <div class="order-form glass" id="orderForm" style="display: none;">
-        <h3>Оформление заказа</h3>
-        <form id="purchaseForm">
-            <div class="form-group">
-                <label for="username">Ваш Telegram @username</label>
-                <input type="text" id="username" required placeholder="@username">
-                <div class="error-message" id="usernameError"></div>
-            </div>
-            <div class="selected-package" id="selectedPackage"></div>
-            <button type="submit" class="payment-btn">Перейти к оплате</button>
-        </form>
-    </div>
-</section>
+            
+            <p class="footer-note">NeyStar — делаем процесс поддержки создателей быстрым, безопасным и приятным.</p>
             
             <div class="order-form glass" id="orderForm" style="display: none;">
                 <h3>Оформление заказа</h3>
@@ -94,6 +80,13 @@
                         <div class="error-message" id="usernameError"></div>
                     </div>
                     <div class="selected-package" id="selectedPackage"></div>
+                    
+                    <!-- Добавленная инструкция -->
+                    <div class="payment-notice">
+                        <div class="notice-icon">!</div>
+                        <p>Обязательно укажите в комментарии ваш Username, иначе сумма будет отправлена как донат</p>
+                    </div>
+                    
                     <button type="submit" class="payment-btn pulse-on-hover">Перейти к оплате</button>
                 </form>
             </div>
