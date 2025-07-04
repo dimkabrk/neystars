@@ -288,97 +288,75 @@ h1 span {
   }
 }
 
-/* Новые стили для разделов "Отзывы" и "О нас" */
-section {
-    max-width: 1200px;
-    margin: 0 auto 3rem;
-    padding: 2rem;
+.reviews-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    position: relative;
 }
 
-h2 {
-    font-family: var(--accent-font);
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--accent);
+.reviews-container {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    scroll-behavior: smooth;
 }
 
-/* Стили для системы отзывов */
-.review-btn {
+.review-card {
+    min-width: 100%;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(100%);
+    position: absolute;
+}
+
+.review-card.active {
+    opacity: 1;
+    transform: translateX(0);
+    position: relative;
+}
+
+.slider-arrow {
     background: rgba(255, 215, 0, 0.1);
     color: var(--accent);
     border: 1px solid var(--accent);
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     font-size: 1rem;
     cursor: pointer;
-    margin: 1rem auto 2rem;
-    display: block;
     transition: all 0.3s ease;
-}
-
-.review-btn:hover {
-    background: rgba(255, 215, 0, 0.2);
-    transform: translateY(-2px);
-}
-
-/* Модальное окно */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 15, 26, 0.8);
-    z-index: 1000;
+    flex-shrink: 0;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.modal-content {
-    background: var(--dark);
-    padding: 2rem;
-    border-radius: 12px;
-    max-width: 500px;
-    width: 90%;
-    position: relative;
-    border: 1px solid var(--accent);
+.slider-arrow:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: scale(1.1);
 }
 
-.close-modal {
-    position: absolute;
-    top: 1rem;
-    right: 1.5rem;
-    font-size: 1.5rem;
-    cursor: pointer;
+/* Остальные стили для отзывов остаются прежними */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
 }
 
-.rating-stars {
-    margin: 1rem 0;
-    font-size: 2rem;
-    letter-spacing: 5px;
-}
-
-.star {
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.star:hover, .star.active {
+.review-stars {
     color: var(--accent);
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
-#review-text {
-    width: 100%;
-    padding: 1rem;
-    margin: 1rem 0;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    color: white;
-    resize: none;
+.review-text {
+    line-height: 1.6;
 }
 
 /* Обновленные стили для раздела "О нас" */
