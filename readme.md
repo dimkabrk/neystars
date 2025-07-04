@@ -1,26 +1,68 @@
---Добавление новых товаров
+NeyStar - Покупка Telegram Stars
+Описание проекта
+NeyStar - это веб-приложение для покупки Telegram Stars по выгодной цене с мгновенной доставкой. Проект включает в себя:
 
---В разделе product-section (index.html) добавьте новые карточки товаров по образцу:
+Главную страницу с выбором пакетов звёзд
 
-html
-<div class="product-card">
-    <div class="product-image">
-        <i class="fas fa-gift"></i>
-        <div class="stars-count">25</div> <!-- Количество звёзд -->
-    </div>
-    <div class="product-details">
-        <h3>Подарок 25 звёзд</h3>
-        <p>Описание товара</p>
-        <div class="price">$18.00</div> <!-- Цена -->
-        <div class="buy-button" id="product25StarsButton">Купить через Telegram</div>
-    </div>
-</div>
+Форму оформления заказа
 
+Интеграцию с Google Apps Script для обработки заказов
 
---В script.js добавьте обработчик для новой кнопки:
+Адаптивный дизайн с анимациями
 
-javascript
-const product25StarsButton = document.getElementById('product25StarsButton');
-product25StarsButton.addEventListener('click', function() {
-    window.open('https://t.me/your_bot_username?start=25stars', '_blank');
-});
+Установка и запуск
+Склонируйте репозиторий:
+
+bash
+git clone https://github.com/your-repository/neystar.git
+cd neystar
+Откройте файл index.html в браузере:
+
+bash
+open index.html
+Или запустите через локальный сервер (например, с помощью Live Server в VS Code).
+
+Структура проекта
+text
+neystar/
+├── index.html          # Главная страница
+├── style.css           # Стили приложения
+├── script.js           # Логика работы приложения
+├── README.md           # Инструкция (этот файл)
+Настройка
+Для работы с Google Apps Script необходимо:
+
+Создать новый проект в Google Apps Script
+
+Развернуть его как веб-приложение
+
+Заменить GOOGLE_SCRIPT_URL в script.js на URL вашего скрипта
+
+Использование
+Выберите пакет звёзд, нажав на кнопку "Выбрать"
+
+Введите ваш Telegram @username в форме заказа
+
+Нажмите "Перейти к оплате"
+
+После успешной оплаты звёзды будут мгновенно доставлены
+
+Особенности
+Адаптивный дизайн для всех устройств
+
+Анимации и визуальные эффекты
+
+Валидация формы
+
+Интеграция с платежной системой
+
+Логирование заказов через Google Sheets
+
+Технологии
+HTML5
+
+CSS3 (Flexbox, Grid, анимации)
+
+JavaScript (ES6)
+
+Google Apps Script (для бэкенда)
