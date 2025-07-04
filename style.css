@@ -12,7 +12,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: all 0.3s ease;
 }
 
 body {
@@ -21,10 +20,9 @@ body {
   background: var(--dark);
   min-height: 100vh;
   line-height: 1.6;
-  overflow-x: hidden;
 }
 
-/* Улучшенный фон со звёздами */
+/* Фон со звёздами */
 .stars-bg {
   position: fixed;
   top: 0;
@@ -32,41 +30,71 @@ body {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%),
-    linear-gradient(to bottom, rgba(15,15,26,0.1), rgba(15,15,26,1) 100%);
+    radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 25%),
+    radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 25%),
+    var(--dark);
   z-index: -1;
-  overflow: hidden;
 }
 
-/* Анимированные звёзды */
-.star {
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-  animation: twinkle var(--duration, 5s) infinite var(--delay, 0s);
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.3);
-}
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.2; transform: scale(0.5); }
-  50% { opacity: 1; transform: scale(1); }
-}
-
-/* Стиль "стекло" с улучшенной анимацией */
+/* Стиль "стекло" */
 .glass {
   background: var(--glass);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 16px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
 }
 
-.glass:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+/* Шапка */
+header {
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
-/* Анимации кнопок */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.logo-icon {
+  color: var(--accent);
+  font-size: 1.5rem;
+}
+
+/* Главная секция */
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-family: var(--accent-font);
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero h1 span {
+  color: var(--accent);
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+.cta-container {
+  margin-top: 3rem;
+}
+
 .cta-btn {
   display: inline-block;
   background: var(--accent);
@@ -76,151 +104,274 @@ body {
   font-weight: 700;
   font-size: 1.2rem;
   text-decoration: none;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-  position: relative;
-  overflow: hidden;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
 
 .cta-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
 }
 
-.cta-btn:active {
-  transform: translateY(1px) scale(0.98);
+.benefits {
+  margin-top: 2rem;
+  color: rgba(255, 255, 255, 0.8);
 }
 
-/* Пульсация для кнопки "Купить звёзды сейчас" */
-.pulse {
-  animation: pulse 2s infinite ease-in-out;
+.benefits p {
+  margin-bottom: 0.5rem;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
-  70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
-  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+/* Секция покупки */
+.purchase-section {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
 }
 
-/* Анимация нажатия */
+.purchase-section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: var(--accent-font);
+  color: var(--accent);
+}
+
+.package-list {
+  margin: 2rem 0;
+}
+
+.package-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.package-item:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.package-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stars-count {
+  font-weight: 600;
+}
+
+.stars-price {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.buy-btn {
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.buy-btn:hover {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+/* Форма заказа */
+.order-form {
+  padding: 2rem;
+  margin-top: 2rem;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.order-form h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: white;
+}
+
+.error-message {
+  color: #ff5555;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  display: none;
+}
+
+input.error {
+  border-color: #ff5555 !important;
+}
+
+.selected-package {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(255, 215, 0, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.payment-btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--accent);
+  color: var(--dark);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.payment-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+/* Подвал */
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.footer-link {
+  color: var(--light);
+  text-decoration: none;
+  font-size: 0.9rem;
+  position: relative;
+  padding: 0.3rem 0;
+  transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--accent);
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+.link-divider {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.9rem;
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+/* Анимация кнопок */
 .btn-click {
-  animation: clickEffect 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  animation: clickEffect 0.3s;
 }
 
 @keyframes clickEffect {
   0% { transform: scale(1); }
-  50% { transform: scale(0.92); }
+  50% { transform: scale(0.95); }
   100% { transform: scale(1); }
 }
 
-/* Улучшенные стили формы */
-.form-group input {
-  transition: all 0.3s ease, box-shadow 0.3s ease;
+/* Анимация пульсации */
+.pulse {
+  animation: pulse 2s infinite;
 }
 
-.form-group input:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
 }
 
-/* Эффект при наведении на пакеты */
-.package-item {
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.package-item:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  border-color: var(--accent);
-}
-
-/* Анимация появления формы */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.form-show-animation {
-  animation: fadeInUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-/* Улучшенные алерты */
-.alert-box {
-  animation: slideDown 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -30px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
-/* Адаптивные улучшения */
+/* Адаптивность */
 @media (max-width: 768px) {
-  .glass {
-    backdrop-filter: blur(8px);
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero {
+    padding: 3rem 1.5rem;
+  }
+  
+  .purchase-section {
+    padding: 1.5rem;
+  }
+  
+  .footer-links {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.8rem;
   }
   
   .cta-btn {
-    padding: 0.9rem 2rem;
-    font-size: 1.1rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
   }
   
-  .pulse {
-    animation: pulse-mobile 2s infinite ease-in-out;
+  .package-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
   }
   
-  @keyframes pulse-mobile {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.03); }
-    100% { transform: scale(1); }
+  .buy-btn {
+    width: 100%;
   }
-}
-
-/* Дополнительные звёзды для фона */
-.star-cluster {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-/* Анимация для кнопки оплаты */
-.payment-btn {
-  position: relative;
-  overflow: hidden;
-}
-
-.payment-btn::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    to bottom right,
-    rgba(255, 255, 255, 0) 45%,
-    rgba(255, 255, 255, 0.3) 50%,
-    rgba(255, 255, 255, 0) 55%
-  );
-  transform: rotate(30deg);
-  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.payment-btn:hover::after {
-  left: 100%;
-  top: 100%;
 }
