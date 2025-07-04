@@ -1,25 +1,33 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Анимация кнопок
-    const buyButtons = document.querySelectorAll('.buy-btn');
+// Анимация счетчиков
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-value');
+    const speed = 200;
     
-    buyButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Анимация нажатия
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-                // Здесь добавьте ссылку на ваш Telegram бот
-                window.open('https://t.me/', '_blank');
-            }, 200);
-        });
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-count');
+        const count = +counter.innerText;
+        const increment = target / speed;
+        
+        if (count < target) {
+            counter.innerText = Math.ceil(count + increment);
+            setTimeout(animateCounters, 1);
+        } else {
+            counter.innerText = target.toLocaleString();
+        }
     });
+}
 
-    // Дополнительная анимация для карточек отзывов и фич
-    const cards = document.querySelectorAll('.review-card, .feature');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transition = 'all 0.3s ease';
-        });
-    });
-});
+// Запуск анимации при скролле
+function startCountersWhenVisible() {
+    const aboutSection = document.querySelector('.about-section');
+    const sectionPosition = aboutSection.getBoundingClientRect().top;
+    const screenPosition = window.innerHeight / 1.3;
+    
+    if (sectionPosition < screenPosition) {
+        animateCounters();
+        window.removeEventListener('scroll', startCountersWhenVisible);
+    }
+}
+
+window.addEventListener('scroll', startCountersWhenVisible);
+document.addEventListener('DOMContentLoaded', startCountersWhenVisible);
