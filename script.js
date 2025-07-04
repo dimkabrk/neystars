@@ -13,9 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
   // Текущий выбранный пакет
   let currentPackage = null;
   
-  // Обработчики выбора пакета
+  // Анимация кнопок выбора
   buyBtns.forEach(btn => {
     btn.addEventListener('click', function() {
+      // Анимация нажатия
+      this.classList.add('btn-click-animation');
+      setTimeout(() => {
+        this.classList.remove('btn-click-animation');
+      }, 300);
+      
       currentPackage = {
         stars: this.getAttribute('data-stars'),
         price: this.getAttribute('data-price')
@@ -27,83 +33,67 @@ document.addEventListener('DOMContentLoaded', function() {
         ${currentPackage.stars} звёзд за ${currentPackage.price} ₽
       `;
       
-      // Показываем форму
+      // Показываем форму с анимацией
       orderForm.style.display = 'block';
+      orderForm.classList.add('form-show-animation');
       
       // Плавная прокрутка к форме
-      orderForm.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+      setTimeout(() => {
+        orderForm.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 100);
       
       // Фокусируем поле ввода
       usernameInput.focus();
     });
   });
   
- purchaseForm.addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  // Получаем текущую дату и время
-  const now = new Date();
-  const timestamp = now.toLocaleString('ru-RU', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
-  });
-
-  // Валидация
-  const username = usernameInput.value.trim();
-  if (!username) {
-    showAlert('Пожалуйста, введите ваш Telegram username');
-    return;
-  }
-
-  if (!currentPackage) {
-    showAlert('Пожалуйста, выберите пакет звёзд');
-    return;
-  }
-
-  try {
-    const formData = new FormData();
-    formData.append('timestamp', timestamp); // Добавляем метку времени
-    formData.append('username', username);
-    formData.append('package', `${currentPackage.stars} звёзд`);
-    formData.append('amount', `${currentPackage.price} ₽`);
+  // Отправка формы
+  purchaseForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
     
-    const response = await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      body: formData
+    // Получаем текущую дату и время
+    const now = new Date();
+    const timestamp = now.toLocaleString('ru-RU', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
     });
-    
-    if (!response.ok) throw new Error('Ошибка сети');
-    
-    showAlert('Заявка принята! Сейчас вы будете перенаправлены на оплату.', 'success');
-    setTimeout(() => {
-      window.open(SBP_PAYMENT_LINK + currentPackage.price, '_blank');
-    }, 1500);
-    
-    purchaseForm.reset();
-    orderForm.style.display = 'none';
-    
-  } catch (error) {
-    console.error('Ошибка:', error);
-    showAlert('Произошла ошибка при отправке заявки');
-  }
-});
-    
+
+    // Валидация
+    const username = usernameInput.value.trim();
+    if (!username) {
+      showAlert('Пожалуйста, введите ваш Telegram username');
+      return;
+    }
+
+    if (!username.startsWith('@')) {
+      showAlert('Username должен начинаться с @');
+      return;
+    }
+
+    if (!currentPackage) {
+      showAlert('Пожалуйста, выберите пакет звёзд');
+      return;
+    }
+
     try {
-      // Подготовка данных
+      // Анимация загрузки
+      const submitBtn = purchaseForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Отправка... <span class="spinner"></span>';
+      
       const formData = new FormData();
-      formData.append('date', new Date().toLocaleString());
+      formData.append('timestamp', timestamp);
       formData.append('username', username);
       formData.append('package', `${currentPackage.stars} звёзд`);
       formData.append('amount', `${currentPackage.price} ₽`);
       
-      // Отправка в Google Таблицы
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         body: formData
@@ -111,23 +101,33 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (!response.ok) throw new Error('Ошибка сети');
       
-      // Перенаправление на оплату
       showAlert('Заявка принята! Сейчас вы будете перенаправлены на оплату.', 'success');
+      
+      // Перенаправление без amount в URL
       setTimeout(() => {
-        window.open(SBP_PAYMENT_LINK + currentPackage.price, '_blank');
+        window.open(SBP_PAYMENT_LINK, '_blank');
       }, 1500);
       
       // Сброс формы
       purchaseForm.reset();
-      orderForm.style.display = 'none';
+      orderForm.classList.remove('form-show-animation');
+      setTimeout(() => {
+        orderForm.style.display = 'none';
+      }, 300);
       
     } catch (error) {
       console.error('Ошибка:', error);
       showAlert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже.');
+    } finally {
+      const submitBtn = purchaseForm.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Перейти к оплате';
+      }
     }
   });
   
-  // Вспомогательная функция для показа уведомлений
+  // Функция показа уведомлений
   function showAlert(message, type = 'error') {
     const alertBox = document.createElement('div');
     alertBox.className = `alert-box ${type}`;
