@@ -74,6 +74,36 @@
             </div>
         </section>
 
+        <section class="reviews-section glass">
+    <h2>Отзывы наших клиентов</h2>
+    
+    <button id="open-review-btn" class="review-btn glass">✧ Оставить отзыв ✧</button>
+    
+    <div class="reviews-grid" id="reviews-container">
+        <!-- Отзывы будут загружаться здесь -->
+    </div>
+
+    <!-- Модальное окно для отзыва -->
+    <div id="review-modal" class="modal glass">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Ваш отзыв</h3>
+            
+            <div class="rating-stars">
+                <span class="star" data-value="1">☆</span>
+                <span class="star" data-value="2">☆</span>
+                <span class="star" data-value="3">☆</span>
+                <span class="star" data-value="4">☆</span>
+                <span class="star" data-value="5">☆</span>
+            </div>
+            
+            <textarea id="review-text" placeholder="Расскажите о вашем опыте..." rows="5"></textarea>
+            
+            <button id="submit-review" class="review-btn">Отправить на проверку</button>
+        </div>
+    </div>
+</section>
+
         <!-- Обновленный раздел: О нас -->
         <section class="about-section">
             <div class="glass about-container">
