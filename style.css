@@ -67,704 +67,277 @@ header {
   font-size: 1.5rem;
 }
 
-/* Основной контент */
+/* Главная секция */
 .hero {
-  padding: 2rem;
   text-align: center;
-  max-width: 1200px;
+  padding: 4rem 2rem;
+  max-width: 800px;
   margin: 0 auto;
 }
 
-h1 {
+.hero h1 {
   font-family: var(--accent-font);
-  font-size: 3.5rem;
-  text-transform: uppercase;
+  font-size: 3rem;
   margin-bottom: 1rem;
-  letter-spacing: 2px;
 }
 
-h1 span {
+.hero h1 span {
   color: var(--accent);
 }
 
 .subtitle {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   opacity: 0.8;
-  margin-bottom: 3rem;
-  font-weight: 400;
+  margin-bottom: 2rem;
 }
 
-/* Сетка карточек */
-.cta-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
+.cta-container {
+  margin-top: 3rem;
 }
 
-/* Стили карточек */
-.price-card {
-  padding: 2rem;
-  text-align: center;
-  transition: all 0.3s ease;
-  position: relative;
-  border-radius: 12px;
-}
-
-/* Обводка при наведении */
-.price-card:hover {
-  box-shadow: 0 0 0 2px var(--accent), 
-              0 0 20px rgba(255, 215, 0, 0.3);
-  transform: translateY(-5px);
-}
-
-.price-card.accent {
-  border: 1px solid var(--accent);
-}
-
-.price-card.accent:hover {
-  box-shadow: 0 0 0 3px var(--accent), 
-              0 0 25px rgba(255, 215, 0, 0.4);
-}
-
-/* Содержимое карточек */
-.price-card h3 {
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-}
-
-.amount {
-  font-family: var(--accent-font);
-  font-size: 3.5rem;
-  color: var(--accent);
-  line-height: 1;
-  margin: 0.5rem 0;
-}
-
-.stars-text {
-  font-size: 1.25rem;
-  opacity: 0.8;
-  margin-bottom: 1.5rem;
-}
-
-.price {
-  font-size: 1.75rem;
-  margin: 1.5rem 0;
-  font-weight: 700;
-}
-
-/* Кнопки */
-.buy-btn {
+.cta-btn {
+  display: inline-block;
   background: var(--accent);
   color: var(--dark);
-  border: none;
-  padding: 1rem 2rem;
-  font-family: var(--main-font);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
   font-weight: 700;
-  border-radius: 8px;
-  cursor: pointer;
-  width: 100%;
+  font-size: 1.2rem;
+  text-decoration: none;
   transition: all 0.3s;
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
 
-.buy-btn:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
 }
 
-/* Подвал */
-/* Футер */
-.footer-glass {
-    background: rgba(15, 15, 26, 0.7);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 215, 0, 0.1);
-    padding: 2rem 0;
-    margin-top: 4rem;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    text-align: center;
-}
-
-.footer-motto {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    font-weight: 300;
-}
-
-.footer-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.footer-link {
-    color: var(--light);
-    text-decoration: none;
-    font-size: 0.9rem;
-    position: relative;
-    padding: 0.3rem 0;
-    transition: all 0.3s ease;
-}
-
-.footer-link:hover {
-    color: var(--accent);
-}
-
-.footer-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-}
-
-.footer-link:hover::after {
-    width: 100%;
-}
-
-.link-divider {
-    color: rgba(255, 255, 255, 0.2);
-    font-size: 0.9rem;
-}
-
-.footer-copyright {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .footer-glass {
-        padding: 1.5rem 0;
-    }
-    
-    .footer-motto {
-        font-size: 0.9rem;
-    }
-    
-    .footer-links {
-        flex-wrap: wrap;
-        gap: 0.5rem 1rem;
-    }
-    
-    .link-divider {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.5rem;
-  }
-  
-  .cta-grid {
-    grid-template-columns: 1fr;
-    max-width: 400px;
-  }
-  
-  .subtitle {
-    font-size: 1.1rem;
-  }
-  
-  .price-card {
-    padding: 1.5rem;
-  }
-}
-
-.reviews-widget {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    border-radius: 16px;
-}
-
-@media (max-width: 768px) {
-    .reviews-widget {
-        margin: 2rem auto;
-        padding: 1.5rem;
-    }
-    
-    .reviews-widget h2 {
-        font-size: 2rem;
-    }
-}
-
-/* Обновленные стили для раздела "О нас" */
-.about-section {
-    padding: 4rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.about-container {
-    padding: 3rem;
-    text-align: center;
-    border-radius: 20px;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    margin: 3rem 0;
-}
-
-.stat-card {
-    position: relative;
-    padding: 2rem 1rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 16px;
-    transition: all 0.4s ease;
-    overflow: hidden;
-}
-
-.stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%);
-    z-index: -1;
-}
-
-.stat-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.15);
-    background: rgba(255, 255, 255, 0.07);
-}
-
-.stat-value {
-    font-family: var(--accent-font);
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
-    transition: all 0.3s ease;
-}
-
-.stat-card:hover .stat-value {
-    transform: scale(1.05);
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-
-.stat-label {
-    font-size: 1rem;
-    opacity: 0.9;
-    margin-bottom: 1rem;
-    min-height: 2.5rem;
-}
-
-.stat-icon {
-    font-size: 1.8rem;
-    color: var(--accent);
-    opacity: 0.7;
-    transition: all 0.3s ease;
-}
-
-.stat-card:hover .stat-icon {
-    opacity: 1;
-    transform: scale(1.2);
-}
-
-.about-description {
-    max-width: 600px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    opacity: 0.9;
-}
-
-/* Стили для раздела заказа */
-.order-section {
-  max-width: 500px;
-  margin: 3rem auto;
-  padding: 2.5rem;
-  text-align: center;
-}
-
-.order-header h2 {
-  font-family: var(--accent-font);
-  font-size: 2rem;
-  color: var(--accent);
-  margin-bottom: 0.5rem;
-}
-
-.order-subtitle {
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 2rem;
-  font-size: 1rem;
-}
-
-.order-form {
+.benefits {
   margin-top: 2rem;
-}
-
-.input-group {
-  margin-bottom: 2rem;
-  text-align: left;
-}
-
-.input-group label {
-  display: block;
-  margin-bottom: 0.5rem;
   color: rgba(255, 255, 255, 0.8);
 }
 
-.input-wrapper {
+.benefits p {
+  margin-bottom: 0.5rem;
+}
+
+/* Секция покупки */
+.purchase-section {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
+}
+
+.purchase-section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: var(--accent-font);
+  color: var(--accent);
+}
+
+.package-list {
+  margin: 2rem 0;
+}
+
+.package-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 0 1rem;
-  transition: all 0.3s;
-}
-
-.input-wrapper:hover {
-  border-color: rgba(255, 215, 0, 0.3);
-}
-
-.input-prefix {
-  color: rgba(255, 255, 255, 0.6);
-  margin-right: 0.5rem;
-}
-
-.input-wrapper input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  color: white;
-  padding: 0.8rem 0;
-  outline: none;
-}
-
-.packages-grid {
-  display: grid;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
-}
-
-.package-option {
+  padding: 1rem;
+  margin-bottom: 1rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 215, 0, 0.1);
-  border-radius: 10px;
-  padding: 1.2rem;
-  cursor: pointer;
+  border-radius: 8px;
   transition: all 0.3s;
 }
 
-.package-option.selected {
-  background: rgba(255, 215, 0, 0.05);
+.package-item:hover {
   border-color: var(--accent);
   transform: translateY(-2px);
 }
 
-.package-option:hover {
-  border-color: rgba(255, 215, 0, 0.3);
+.package-info {
+  display: flex;
+  flex-direction: column;
 }
 
 .stars-count {
-  font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 0.3rem;
 }
 
-.package-price {
+.stars-price {
   color: var(--accent);
   font-weight: 700;
-  font-size: 1.3rem;
 }
 
-.sbp-btn {
+.buy-btn {
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.buy-btn:hover {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+/* Форма заказа */
+.order-form {
+  padding: 2rem;
+  margin-top: 2rem;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.order-form h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: white;
+}
+
+.selected-package {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(255, 215, 0, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.payment-btn {
+  width: 100%;
+  padding: 1rem;
   background: var(--accent);
   color: var(--dark);
   border: none;
-  border-radius: 8px;
-  padding: 1rem 2rem;
+  border-radius: 6px;
   font-weight: 600;
-  width: 100%;
   cursor: pointer;
   transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
 }
 
-.sbp-btn:hover {
+.payment-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
 }
 
-.btn-icon {
-  font-weight: bold;
+/* Подвал */
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  text-align: center;
 }
 
-@media (max-width: 600px) {
-  .order-section {
-    padding: 1.5rem;
-    margin: 2rem 1rem;
-  }
-  
-  .order-header h2 {
-    font-size: 1.6rem;
-  }
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
 }
 
-/* Анимация чисел */
-@keyframes countUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.footer-link {
+  color: var(--light);
+  text-decoration: none;
+  font-size: 0.9rem;
+  position: relative;
+  padding: 0.3rem 0;
+  transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--accent);
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+.link-divider {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.9rem;
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
-    .stats-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .stat-value {
-        font-size: 2rem;
-    }
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero {
+    padding: 3rem 1.5rem;
+  }
+  
+  .purchase-section {
+    padding: 1.5rem;
+  }
+  
+  .footer-links {
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 480px) {
-    .stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-}
-    
-    .about-container {
-        padding: 2rem 1rem;
-    }
-}
-
-/* Адаптивность для новых разделов */
-@media (max-width: 768px) {
-    h2 {
-        font-size: 2rem;
-    }
-    
-    .reviews-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .about-features {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Стили для выпадающего списка пакетов */
-.package-select {
-  position: relative;
-  margin-bottom: 2rem;
-  z-index: 100; /* Увеличиваем z-index */
-}
-
-.select-header {
-  background: rgba(15, 15, 26, 0.9); /* Более плотный фон */
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  border-radius: 8px;
-  padding: 0.8rem 1rem; /* Уменьшенный padding */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s;
-  backdrop-filter: blur(10px);
-}
-
-.select-header:hover {
-  border-color: var(--accent);
-}
-
-.arrow {
-  color: var(--accent);
-  font-size: 0.7rem;
-  margin-left: 0.5rem;
-}
-
-.select-options {
-  position: absolute;
-  top: calc(100% + 5px);
-  left: 0;
-  right: 0;
-  background: rgba(15, 15, 26, 0.95);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  border-radius: 8px;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-}
-
-.select-options.active {
-  max-height: 500px;
-}
-
-.option {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.7rem 1rem; /* Уменьшенный padding */
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.option:hover {
-  background: rgba(255, 215, 0, 0.05);
-}
-
-.option .stars {
-  font-weight: 500;
-  font-size: 0.95rem; /* Уменьшенный размер шрифта */
-}
-
-.option .price {
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 0.95rem; /* Уменьшенный размер шрифта */
-}
-
-.divider {
-  height: 1px;
-  background: rgba(255, 215, 0, 0.1);
-  margin: 0.3rem 0;
-}
-
-/* Адаптивность */
-@media (max-width: 600px) {
-  .select-header {
-    padding: 0.7rem 0.9rem;
+  .hero h1 {
+    font-size: 1.8rem;
   }
   
-  .option {
-    padding: 0.6rem 0.9rem;
+  .cta-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
   }
   
-  .option .stars,
-  .option .price {
-    font-size: 0.9rem;
-  }
-}
-
-/* Адаптивность для мобильных устройств */
-@media (max-width: 600px) {
-  .select-header {
-    padding: 0.8rem 1rem;
-    font-size: 0.95rem;
-  }
-  
-  .option {
-    padding: 0.8rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  /* Стили для кнопки "Показать все пакеты" */
-.show-all-btn {
-    display: block;
-    margin: 2rem auto;
-    padding: 1rem 2rem;
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    color: var(--accent);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    max-width: 300px;
+  .package-item {
+    flex-direction: column;
     text-align: center;
-}
-
-.show-all-btn:hover {
-    background: rgba(255, 215, 0, 0.1);
-    border-color: var(--accent);
-    transform: translateY(-2px);
-}
-
-/* Стили для дополнительных пакетов */
-.additional-packages {
-    display: none;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
-    animation: fadeIn 0.5s ease-out;
-}
-
-.additional-packages.active {
-    display: grid;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Стили для отображения ошибок */
-.error-message {
-    color: #ff6b6b;
-    font-size: 0.85rem;
-    margin-top: 0.5rem;
-    height: 1rem;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.error-message.active {
-    opacity: 1;
-}
-
-.input-wrapper.error {
-    border-color: #ff6b6b;
-}
-
-/* Стили для отображения цены */
-.price-display {
-    display: flex;
-    justify-content: space-between;
-    margin: 1.5rem 0;
-    padding: 1rem;
-    background: rgba(255, 215, 0, 0.05);
-    border-radius: 8px;
-    font-size: 1.1rem;
-}
-
-.price-display #total-price {
-    color: var(--accent);
-    font-weight: 700;
-}
-
-/* Анимация скролла к форме */
-@keyframes scrollToForm {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0); }
-}
-
-.scroll-animation {
-    animation: scrollToForm 1.5s ease-in-out;
-}
+    gap: 0.5rem;
+  }
   
-  .select-options {
-    border-radius: 0 0 6px 6px;
+  .buy-btn {
+    width: 100%;
   }
 }
