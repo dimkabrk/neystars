@@ -1,21 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const CONFIG = {
-        paymentLink: "https://www.tinkoff.ru/rm/r_KQkcHeUggc.aUMaYfOFtp/Q1P6h40111",
-        apiEndpoint: "/api/orders"
-    };
-
+    // Элементы DOM
     const buyBtns = document.querySelectorAll('.buy-btn');
     const orderForm = document.getElementById('orderForm');
     const selectedPackage = document.getElementById('selectedPackage');
     const purchaseForm = document.getElementById('purchaseForm');
     const usernameInput = document.getElementById('username');
-    const paymentBtn = purchaseForm.querySelector('button[type="submit"]');
-    const submitText = document.getElementById('submitText');
-    const submitSpinner = document.getElementById('submitSpinner');
-    
     let currentPackage = null;
 
-    // Обработчики выбора пакета
+    // Обработчики событий
     buyBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             currentPackage = {
@@ -29,10 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             
             orderForm.style.display = 'block';
-            window.scrollTo({
-                top: orderForm.offsetTop - 20,
-                behavior: 'smooth'
-            });
             usernameInput.focus();
         });
     });
@@ -45,42 +33,50 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!validateUsername(username)) return;
 
         try {
-            // Активируем состояние загрузки
-            paymentBtn.classList.add('loading');
-            paymentBtn.disabled = true;
-            
-            // Отправка данных на сервер
-            const response = await fetch(CONFIG.apiEndpoint, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    username,
-                    stars: currentPackage.stars,
-                    price: currentPackage.price
-                })
-            });
+            const submitBtn = purchaseForm.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner"></span> Обработка...';
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || `Ошибка сервера: ${response.status}`);
+            // Генерация уникального ID заказа
+            const orderId = 'ORD-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+            
+            // Шифрование данных (базовый пример, в продакшене используйте более надежные методы)
+            const encryptedData = btoa(encodeURIComponent(
+                JSON.stringify({
+                    orderId: orderId,
+                    username: username,
+                    stars: currentPackage.stars,
+                    price: currentPackage.price,
+                    timestamp: new Date().toISOString()
+                })
+            ));
+
+            // Открытие платежной системы с параметрами
+            const paymentUrl = `https://www.tinkoff.ru/rm/r_KQkcHeUggc.aUMaYfOFtp/Q1P6h40111?comment=${encodeURIComponent(orderId + '|' + username)}`;
+            const paymentWindow = window.open(paymentUrl, '_blank');
+            
+            if (!paymentWindow) {
+                showAlert('Разрешите всплывающие окна для этого сайта', 'warning');
             }
 
-            // Открываем платежную систему
-            setTimeout(() => {
-                window.open(CONFIG.paymentLink, '_blank');
-                
-                // Сбрасываем форму
-                purchaseForm.reset();
-                orderForm.style.display = 'none';
-                paymentBtn.classList.remove('loading');
-                paymentBtn.disabled = false;
-            }, 500);
+            // Сброс формы
+            purchaseForm.reset();
+            orderForm.style.display = 'none';
+
+            // Сохранение данных в localStorage
+            localStorage.setItem(orderId, encryptedData);
+
+            showAlert('✅ Заказ оформлен! Проверьте платежную систему.', 'success');
 
         } catch (error) {
             console.error('Ошибка:', error);
             showAlert(`❌ Ошибка: ${error.message}`);
-            paymentBtn.classList.remove('loading');
-            paymentBtn.disabled = false;
+        } finally {
+            const submitBtn = purchaseForm.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Перейти к оплате';
+            }
         }
     });
 
@@ -108,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
             usernameInput.focus();
         }
         
-        // Сброс ошибок если валидация прошла
+        // Сброс ошибки
         usernameInput.classList.remove('error');
         errorElement.style.display = 'none';
         return true;
