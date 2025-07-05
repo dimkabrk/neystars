@@ -1,94 +1,33 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-     <!-- favicon -->
-    <!-- Для большинства браузеров -->
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<!-- Для современных браузеров (PNG) -->
-<link rel="icon" type="image/png" href="favicon.png">
-<!-- Для iPhone/iPad -->
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Политика конфиденциальности | NeyStar</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap">
-    <style>
-        body {
-            font-family: 'Manrope', sans-serif;
-            background-color: #0f0f1a;
-            color: #ffffff;
-            line-height: 1.6;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .privacy-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-        
-        h1 {
-            color: #ffd700;
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-        }
-        
-        h2 {
-            color: #ffd700;
-            margin-top: 2rem;
-            font-size: 1.4rem;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-            padding-bottom: 0.5rem;
-        }
-        
-        p, li {
-            margin-bottom: 1rem;
-        }
-        
-        ul {
-            padding-left: 1.5rem;
-        }
-        
-        .back-btn {
-            display: inline-block;
-            margin-top: 2rem;
-            padding: 0.5rem 1.5rem;
-            background: rgba(255, 215, 0, 0.1);
-            color: #ffd700;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 20px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .back-btn:hover {
-            background: rgba(255, 215, 0, 0.2);
-        }
-        
-        @media (max-width: 768px) {
-            .privacy-container {
-                margin: 1rem;
-                padding: 1.5rem;
-            }
-        }
-    </style>
+    <title>Политика конфиденциальности | NeyStars</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Montserrat:wght@700&display=swap">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="stars-bg"></div>
     
-    <div class="privacy-container">
-        <h1>Политика конфиденциальности NeyStar</h1>
+    <header class="glass">
+        <div class="logo">
+            <span class="logo-icon">✧</span>
+            <span>NeyStars</span>
+        </div>
+    </header>
+
+    <main class="glass privacy-container">
+        <h1>Политика конфиденциальности NeyStars</h1>
         
         <p><strong>Дата вступления в силу:</strong> 4 июля 2025 года</p>
         
         <h2>1. Общие положения</h2>
-        <p>1.1. Сервис NeyStar (далее — "Сервис") обязуется защищать вашу конфиденциальность в соответствии с настоящей Политикой.</p>
+        <p>1.1. Сервис NeyStars (далее — "Сервис") обязуется защищать вашу конфиденциальность в соответствии с настоящей Политикой.</p>
         <p>1.2. Используя наш Сервис, вы соглашаетесь с условиями обработки ваших данных.</p>
         
         <h2>2. Какие данные мы собираем</h2>
@@ -123,9 +62,30 @@
             <li>Отозвать согласие на обработку данных</li>
         </ul>
         
-        <p>По всем вопросам обращайтесь: <a href="mailto:privacy@neystar.ru" style="color: #ffd700;">скоро</a></p>
+        <p>По всем вопросам обращайтесь: <a href="mailto:privacy@neystars.ru" style="color: #ffd700;">privacy@neystars.ru</a></p>
         
         <a href="index.html" class="back-btn">← Вернуться на главную</a>
-    </div>
+    </main>
+
+    <footer class="glass">
+        <div class="footer-content">
+            <p>NeyStars — делаем процесс поддержки создателей быстрым, безопасным и приятным.</p>
+            <div class="footer-links">
+                <a href="privacy.html" class="footer-link">Политика конфиденциальности</a>
+                <span class="link-divider">|</span>
+                <a href="rules.html" class="footer-link">Правила пользования</a>
+            </div>
+            <!-- Добавленная плашка Telegram -->
+            <div class="telegram-badge">
+                <a href="https://t.me/ney_stars" target="_blank" title="Наш Telegram-канал">
+                    <i class="fab fa-telegram telegram-icon"></i>
+                </a>
+            </div>
+            <span class="telegram-text">Наш канал в Telegram</span>
+            <p class="copyright">© 2025 NeyStars</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
