@@ -39,49 +39,12 @@
             </div>
         </section>
 
-        <div id="yandex-reviews-widget"></div>
-
-<script src="https://api-maps.yandex.ru/2.1/?apikey=a3277d3c-4e38-4eda-af70-6c3f425d7168&lang=ru_RU" type="text/javascript"></script>
-<script>
-  ymaps.ready(init);
-  
-  function init() {
-    var myMap = new ymaps.Map('yandex-reviews-widget', {
-      center: [55.76, 37.64],
-      zoom: 10,
-      controls: []
-    });
-    
-    var organizationId = '181789167865'; // Замените на ID вашей организации
-    
-    var objectManager = new ymaps.ObjectManager({
-      clusterize: true,
-      gridSize: 32,
-      clusterDisableClickZoom: true
-    });
-    
-    objectManager.objects.options.set('preset', 'islands#blueOrganizationIcon');
-    objectManager.clusters.options.set('preset', 'islands#blueClusterIcons');
-    myMap.geoObjects.add(objectManager);
-    
-    ymaps.modules.require(['OrganizationReviews'], function (OrganizationReviews) {
-      var orgReviews = new OrganizationReviews(
-        myMap, 
-        organizationId, 
-        { 
-          // Настройки виджета
-          noScroll: true,
-          newReviewButton: 'enable',
-          filter: 'all'
-        }
-      );
-      
-      orgReviews.events.add('ready', function () {
-        orgReviews.show();
-      });
-    });
-  }
-</script>
+<iframe 
+  src="https://yandex.ru/maps-reviews-widget/181789167865?comments"
+  width="100%" 
+  height="500" 
+  frameborder="0">
+</iframe>
         
         <section id="purchase" class="purchase-section glass">
             <h2>Выберите пакет звёзд</h2>
