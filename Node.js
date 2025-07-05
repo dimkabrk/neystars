@@ -7,55 +7,49 @@ const crypto = require('crypto');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Настройка бота
+// Инициализация бота
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN);
-const ADMIN_CHAT_ID = process.env.ADMIN_CHAT_ID;
 
 // Middleware
 app.use(bodyParser.json());
 
-// Генерация ключа для подписи данных
+// Генерация HMAC подписи
 const generateSignature = (data) => {
   return crypto.createHmac('sha256', process.env.SECRET_KEY)
     .update(JSON.stringify(data))
     .digest('hex');
 };
 
-// API endpoint для обработки заказов
-app.post('/api/orders', async (req, res) => {
+// Endpoint для обработки заказов
+app.post('/api/submit-order', async (req, res) => {
   try {
-    const { username, packageData, clientSignature } = req.body;
+    const { username, packageData, signature } = req.body;
 
     // Верификация подписи
-    const serverSignature = generateSignature({ username, packageData });
-    if (serverSignature !== clientSignature) {
-      return res.status(403).json({ error: 'Invalid signature' });
+    const validSignature = generateSignature({ username, ...packageData });
+    if (signature !== validSignature) {
+      return res.status(403).json({ error: 'Invalid request signature' });
     }
 
-    // Отправка уведомления админу
-    const orderId = `ORD-${Date.now()}`;
+    // Отправка сообщения напрямую вам
     await bot.sendMessage(
-      ADMIN_CHAT_ID,
-      `📦 Новый заказ!\n\n` +
-      `ID: ${orderId}\n` +
-      `Username: ${username}\n` +
-      `Пакет: ${packageData.stars} звёзд\n` +
-      `Цена: ${packageData.price} ₽\n\n` +
-      `Время: ${new Date().toLocaleString()}`
+      process.env.YOUR_TELEGRAM_ID,
+      `🛒 Новая заявка:\n\n` +
+      `👤 Пользователь: ${username}\n` +
+      `⭐ Пакет: ${packageData.stars} звёзд\n` +
+      `💰 Сумма: ${packageData.price} ₽\n` +
+      `🕒 ${new Date().toLocaleString()}\n\n` +
+      `📝 ID: ${crypto.randomBytes(4).toString('hex').toUpperCase()}`
     );
 
-    res.json({ success: true, orderId });
+    res.json({ success: true });
   } catch (error) {
-    console.error('Order error:', error);
+    console.error('Order submission error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
 // Защита от сканирования .env
-app.get('/.env', (req, res) => {
-  res.status(403).send('Access denied');
-});
+app.get('/.env*', (req, res) => res.status(403).send('Access denied'));
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+app.listen(port, () => console.log(`Server running on port ${port}`));
