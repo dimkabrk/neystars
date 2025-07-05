@@ -10,6 +10,21 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Montserrat:wght@700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Временные стили для отладки */
+        .package-item.active {
+            border: 2px solid #ffd700;
+            background: rgba(255, 215, 0, 0.05);
+        }
+        #orderForm.show {
+            display: block !important;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
     <div class="stars-bg"></div>
@@ -112,6 +127,92 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Отладочная информация
+            console.log('Скрипт загружен');
+            
+            // Элементы
+            const packageItems = document.querySelectorAll('.package-item');
+            const buyButtons = document.querySelectorAll('.buy-btn');
+            const orderForm = document.getElementById('orderForm');
+            const selectedPackage = document.getElementById('selectedPackage');
+            const usernameInput = document.getElementById('username');
+            const purchaseForm = document.getElementById('purchaseForm');
+            
+            console.log('Найдено пакетов:', packageItems.length);
+            console.log('Найдено кнопок:', buyButtons.length);
+
+            // Обработчик выбора пакета
+            buyButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Удаляем активный класс у всех пакетов
+                    packageItems.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Добавляем активный класс текущему пакету
+                    const packageItem = this.closest('.package-item');
+                    packageItem.classList.add('active');
+                    
+                    // Получаем данные пакета
+                    const stars = this.getAttribute('data-stars');
+                    const price = this.getAttribute('data-price');
+                    
+                    console.log('Выбран пакет:', { stars, price });
+                    
+                    // Показываем выбранный пакет
+                    selectedPackage.innerHTML = `
+                        <strong>Выбранный пакет:</strong><br>
+                        ${stars} звёзд за ${price} ₽
+                    `;
+                    
+                    // Показываем форму заказа
+                    orderForm.classList.add('show');
+                    orderForm.style.display = 'block';
+                    
+                    // Прокрутка к форме
+                    orderForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                    // Фокус на поле ввода
+                    usernameInput.focus();
+                });
+            });
+
+            // Обработчик отправки формы
+            purchaseForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = usernameInput.value.trim();
+                const activePackage = document.querySelector('.package-item.active');
+                
+                if (!activePackage) {
+                    alert('Пожалуйста, выберите пакет звёзд!');
+                    return;
+                }
+                
+                if (!username || !username.startsWith('@')) {
+                    alert('Введите корректный Telegram @username');
+                    return;
+                }
+                
+                const stars = activePackage.querySelector('.buy-btn').getAttribute('data-stars');
+                const price = activePackage.querySelector('.buy-btn').getAttribute('data-price');
+                
+                console.log('Отправка заказа:', { username, stars, price });
+                alert('✅ Заказ успешно оформлен! Проверьте Telegram.');
+                
+                // Здесь будет код отправки данных на сервер
+                // fetch('/api/order', { ... })
+                
+                // Сброс формы
+                this.reset();
+                orderForm.style.display = 'none';
+                packageItems.forEach(item => item.classList.remove('active'));
+            });
+        });
+    </script>
 </body>
 </html>
