@@ -1,125 +1,46 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Элементы DOM
-    const buyBtns = document.querySelectorAll('.buy-btn');
-    const orderForm = document.getElementById('orderForm');
-    const selectedPackage = document.getElementById('selectedPackage');
-    const purchaseForm = document.getElementById('purchaseForm');
-    const usernameInput = document.getElementById('username');
-    let currentPackage = null;
+  // Элементы формы
+  const purchaseForm = document.getElementById('purchaseForm');
+  
+  purchaseForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const username = document.getElementById('username').value.trim();
+    const packageData = {
+      stars: document.querySelector('.package-item.active').dataset.stars,
+      price: document.querySelector('.package-item.active').dataset.price
+    };
 
-    // Обработчики событий
-    buyBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            currentPackage = {
-                stars: this.getAttribute('data-stars'),
-                price: this.getAttribute('data-price')
-            };
-            
-            selectedPackage.innerHTML = `
-                <strong>Выбранный пакет:</strong><br>
-                ${currentPackage.stars} звёзд за ${currentPackage.price} ₽
-            `;
-            
-            orderForm.style.display = 'block';
-            usernameInput.focus();
-        });
-    });
+    // Подпись данных (без использования секретного ключа)
+    const signature = await generateClientSignature(username, packageData);
+    
+    try {
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, packageData, clientSignature: signature })
+      });
 
-    // Отправка формы
-    purchaseForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const username = usernameInput.value.trim();
-        if (!validateUsername(username)) return;
-
-        try {
-            const submitBtn = purchaseForm.querySelector('button[type="submit"]');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner"></span> Обработка...';
-
-            // Генерация уникального ID заказа
-            const orderId = 'ORD-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
-            
-            // Шифрование данных (базовый пример, в продакшене используйте более надежные методы)
-            const encryptedData = btoa(encodeURIComponent(
-                JSON.stringify({
-                    orderId: orderId,
-                    username: username,
-                    stars: currentPackage.stars,
-                    price: currentPackage.price,
-                    timestamp: new Date().toISOString()
-                })
-            ));
-
-            // Открытие платежной системы с параметрами
-            const paymentUrl = `https://www.tinkoff.ru/rm/r_KQkcHeUggc.aUMaYfOFtp/Q1P6h40111?comment=${encodeURIComponent(orderId + '|' + username)}`;
-            const paymentWindow = window.open(paymentUrl, '_blank');
-            
-            if (!paymentWindow) {
-                showAlert('Разрешите всплывающие окна для этого сайта', 'warning');
-            }
-
-            // Сброс формы
-            purchaseForm.reset();
-            orderForm.style.display = 'none';
-
-            // Сохранение данных в localStorage
-            localStorage.setItem(orderId, encryptedData);
-
-            showAlert('✅ Заказ оформлен! Проверьте платежную систему.', 'success');
-
-        } catch (error) {
-            console.error('Ошибка:', error);
-            showAlert(`❌ Ошибка: ${error.message}`);
-        } finally {
-            const submitBtn = purchaseForm.querySelector('button[type="submit"]');
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Перейти к оплате';
-            }
-        }
-    });
-
-    // Валидация username
-    function validateUsername(username) {
-        const errorElement = document.getElementById('usernameError');
-        
-        if (!username) {
-            showError('Пожалуйста, введите ваш Telegram username');
-            return false;
-        }
-        if (!username.startsWith('@')) {
-            showError('Username должен начинаться с @');
-            return false;
-        }
-        if (username.length < 5) {
-            showError('Username слишком короткий');
-            return false;
-        }
-        
-        function showError(message) {
-            usernameInput.classList.add('error');
-            errorElement.textContent = message;
-            errorElement.style.display = 'block';
-            usernameInput.focus();
-        }
-        
-        // Сброс ошибки
-        usernameInput.classList.remove('error');
-        errorElement.style.display = 'none';
-        return true;
+      const data = await response.json();
+      
+      if (data.success) {
+        showAlert('✅ Заказ успешно отправлен!', 'success');
+      } else {
+        showAlert('❌ Ошибка при отправке заказа', 'error');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      showAlert('❌ Ошибка соединения', 'error');
     }
+  });
 
-    // Вспомогательные функции
-    function showAlert(message, type = 'error') {
-        const alertBox = document.createElement('div');
-        alertBox.className = `alert-box ${type}`;
-        alertBox.textContent = message;
-        document.body.appendChild(alertBox);
-        
-        setTimeout(() => {
-            alertBox.classList.add('fade-out');
-            setTimeout(() => alertBox.remove(), 300);
-        }, 3000);
-    }
+  // Генерация подписи на клиенте (имитация)
+  async function generateClientSignature(username, packageData) {
+    const dataString = `${username}|${packageData.stars}|${packageData.price}`;
+    const encoder = new TextEncoder();
+    const data = encoder.encode(dataString);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  }
 });
