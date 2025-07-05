@@ -34,7 +34,12 @@ app.post('/api/submit-order', async (req, res) => {
     if (signature !== validSignature) {
       return res.status(403).json({ error: 'Invalid request signature' });
     }
-
+    
+// Перед отправкой сообщения
+if (process.env.NODE_ENV === 'production') {
+  bot.sendMessage(process.env.YOUR_TELEGRAM_ID, 'Бот запущен в продакшн режиме');
+}
+    
     // Отправка сообщения напрямую вам
     await bot.sendMessage(
       process.env.YOUR_TELEGRAM_ID,
@@ -57,3 +62,10 @@ app.post('/api/submit-order', async (req, res) => {
 app.get('/.env*', (req, res) => res.status(403).send('Access denied'));
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
+
+app.use((req, res, next) => {
+  if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV === 'production') {
+    return res.redirect(`https://${req.headers.host}${req.url}`);
+  }
+  next();
+});
