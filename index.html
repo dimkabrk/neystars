@@ -5,10 +5,10 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeyStars | Telegram Stars</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Montserrat:wght@700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -35,13 +35,6 @@
                 </div>
             </div>
         </section>
-
-        <iframe 
-          src="https://yandex.ru/maps-reviews-widget/181789167865?comments"
-          width="100%" 
-          height="500" 
-          frameborder="0">
-        </iframe>
         
         <section id="purchase" class="purchase-section glass">
             <h2>Выберите пакет звёзд</h2>
@@ -80,6 +73,8 @@
                 </div>
             </div>
             
+            <p class="footer-note">NeyStars — делаем процесс поддержки создателей быстрым, безопасным и приятным.</p>
+            
             <div class="order-form glass" id="orderForm" style="display: none;">
                 <h3>Оформление заказа</h3>
                 <form id="purchaseForm">
@@ -95,14 +90,9 @@
                         <p>Обязательно укажите в комментарии ваш Username, иначе сумма будет отправлена как донат</p>
                     </div>
                     
-                    <button type="submit" class="payment-btn pulse-on-hover">
-                        <span id="submitText">Перейти к оплате</span>
-                        <span id="submitSpinner" style="display: none;">Отправка...</span>
-                    </button>
+                    <button type="submit" class="payment-btn pulse-on-hover">Перейти к оплате</button>
                 </form>
             </div>
-            
-            <p class="footer-note">NeyStars — делаем процесс поддержки создателей быстрым, безопасным и приятным.</p>
         </section>
     </main>
 
@@ -113,16 +103,11 @@
                 <span class="link-divider">|</span>
                 <a href="rules.html" class="footer-link">Правила пользования</a>
             </div>
-            
-            <div class="telegram-container">
-                <div class="telegram-badge">
-                    <a href="https://t.me/ney_stars" target="_blank" title="Наш Telegram-канал">
-                        <i class="fab fa-telegram telegram-icon"></i>
-                    </a>
-                </div>
-                <span class="telegram-text">Наш канал в Telegram</span>
+            <div class="telegram-link">
+                <a href="https://t.me/ney_stars" target="_blank">
+                    <i class="fab fa-telegram"></i> Наш канал
+                </a>
             </div>
-            
             <p class="copyright">© 2025 NeyStars</p>
         </div>
     </footer>
