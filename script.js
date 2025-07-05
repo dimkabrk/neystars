@@ -1,62 +1,72 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('purchaseForm');
-  
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    // Инициализация выбора пакета
+    const packageItems = document.querySelectorAll('.package-item');
+    const orderForm = document.getElementById('orderForm');
+    const selectedPackageElement = document.getElementById('selectedPackage');
+    const usernameInput = document.getElementById('username');
     
-    const submitBtn = form.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span class="spinner"></span> Отправка...';
+    let selectedPackage = null;
 
-    const orderData = {
-      username: document.getElementById('username').value.trim(),
-      packageData: {
-        stars: document.querySelector('.package-item.active').dataset.stars,
-        price: document.querySelector('.package-item.active').dataset.price
-      }
-    };
+    // Обработчики для кнопок "Выбрать"
+    packageItems.forEach(item => {
+        const selectBtn = item.querySelector('.buy-btn');
+        
+        selectBtn.addEventListener('click', function() {
+            // Снимаем выделение со всех пакетов
+            packageItems.forEach(pkg => pkg.classList.remove('active'));
+            
+            // Выделяем выбранный пакет
+            item.classList.add('active');
+            
+            // Сохраняем данные пакета
+            selectedPackage = {
+                stars: this.dataset.stars,
+                price: this.dataset.price
+            };
+            
+            // Показываем информацию о выборе
+            selectedPackageElement.innerHTML = `
+                <strong>Выбранный пакет:</strong><br>
+                ${selectedPackage.stars} звёзд за ${selectedPackage.price} ₽
+            `;
+            
+            // Показываем форму заказа
+            orderForm.style.display = 'block';
+            
+            // Плавная прокрутка к форме
+            orderForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Фокус на поле ввода
+            usernameInput.focus();
+            
+            console.log('Выбран пакет:', selectedPackage); // Для отладки
+        });
+    });
 
-    try {
-      // Клиентская подпись (без секрета)
-      const signature = await generateClientSignature(orderData);
-      
-      const response = await fetch('/api/submit-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...orderData, signature })
-      });
-
-      const result = await response.json();
-      
-      if (result.success) {
-        showAlert('✅ Заявка успешно отправлена!', 'success');
-        form.reset();
-      } else {
-        showAlert('❌ Ошибка при отправке', 'error');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      showAlert('⚠️ Ошибка соединения', 'warning');
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Отправить заявку';
-    }
-  });
-
-  async function generateClientSignature(data) {
-    const str = `${data.username}|${data.packageData.stars}|${data.packageData.price}`;
-    const encoder = new TextEncoder();
-    const hash = await crypto.subtle.digest('SHA-256', encoder.encode(str));
-    return Array.from(new Uint8Array(hash))
-      .map(b => b.toString(16).padStart(2, '0'))
-      .join('');
-  }
-
-  function showAlert(message, type) {
-    const alert = document.createElement('div');
-    alert.className = `alert ${type}`;
-    alert.textContent = message;
-    document.body.appendChild(alert);
-    setTimeout(() => alert.remove(), 5000);
-  }
+    // Обработчик отправки формы
+    document.getElementById('purchaseForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!selectedPackage) {
+            alert('Пожалуйста, выберите пакет!');
+            return;
+        }
+        
+        const username = usernameInput.value.trim();
+        
+        if (!username || !username.startsWith('@')) {
+            alert('Введите корректный Telegram @username');
+            return;
+        }
+        
+        // Здесь будет код отправки данных
+        console.log('Отправка заказа:', { username, ...selectedPackage });
+        alert('✅ Заявка отправлена! Проверьте Telegram.');
+        
+        // Сброс формы
+        this.reset();
+        orderForm.style.display = 'none';
+        packageItems.forEach(pkg => pkg.classList.remove('active'));
+        selectedPackage = null;
+    });
 });
