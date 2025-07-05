@@ -5,6 +5,7 @@
   --light: #ffffff;
   --accent: #ffd700;
   --glass: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -22,6 +23,25 @@ body {
   overflow-x: hidden;
 }
 
+/* Анимации */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* Фон со звёздами */
 .stars-bg {
   position: fixed;
   top: 0;
@@ -29,100 +49,129 @@ body {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 25%),
-    radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 25%),
-    var(--dark);
+    linear-gradient(to bottom, rgba(15, 15, 26, 0.8), rgba(15, 15, 26, 0.9)),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="10" cy="10" r="0.5" fill="white"/><circle cx="30" cy="25" r="0.7" fill="white"/><circle cx="70" cy="15" r="1" fill="white"/><circle cx="85" cy="40" r="0.5" fill="white"/><circle cx="20" cy="60" r="0.7" fill="white"/><circle cx="50" cy="80" r="1" fill="white"/><circle cx="75" cy="70" r="0.5" fill="white"/></svg>');
+  background-size: cover;
   z-index: -1;
 }
 
-.glass {
-  background: var(--glass);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+.stars-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 25%),
+              radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 25%);
+  animation: twinkle 5s infinite ease-in-out;
 }
 
+/* Стиль "стекло" */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Шапка */
 header {
-  padding: 1rem;
+  padding: 1.2rem 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
+  margin: 1rem auto;
+  max-width: 1200px;
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   letter-spacing: 1px;
   font-weight: 700;
+  color: var(--light);
+  text-decoration: none;
 }
 
 .logo-icon {
   color: var(--accent);
-  font-size: 1.2rem;
+  font-size: 1.8rem;
+  animation: pulse 2s infinite;
 }
 
+/* Главная секция */
 .hero {
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 3rem 2rem;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 2rem auto;
+  animation: fadeIn 0.8s ease-out;
 }
 
 .hero h1 {
   font-family: var(--accent-font);
-  font-size: 2rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
 .hero h1 span {
   color: var(--accent);
+  display: inline-block;
 }
 
 .subtitle {
-  font-size: 1rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   opacity: 0.8;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .cta-container {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
 .cta-btn {
   display: inline-block;
   background: var(--accent);
   color: var(--dark);
-  padding: 0.8rem 1.8rem;
+  padding: 1rem 2.5rem;
   border-radius: 50px;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.1rem;
   text-decoration: none;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+  border: none;
+  cursor: pointer;
 }
 
 .cta-btn:hover {
-  transform: translateY(-3px);
+  transform: translateY(-3px) scale(1.02);
   box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
 }
 
 .benefits {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .benefits p {
   margin-bottom: 0.5rem;
 }
 
+/* Секция покупки */
 .purchase-section {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1.5rem;
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2rem;
+  animation: fadeIn 0.8s ease-out 0.2s both;
 }
 
 .purchase-section h2 {
@@ -130,104 +179,118 @@ header {
   margin-bottom: 1.5rem;
   font-family: var(--accent-font);
   color: var(--accent);
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
 
 .package-list {
-  margin: 1.5rem 0;
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
 }
 
 .package-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem;
-  margin-bottom: 0.8rem;
+  flex-direction: column;
+  padding: 1.5rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 215, 0, 0.1);
-  border-radius: 8px;
-  transition: all 0.3s;
+  border-radius: 12px;
+  transition: all 0.3s ease;
 }
 
 .package-item:hover {
   border-color: var(--accent);
-  transform: translateY(-2px);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .package-info {
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 1.5rem;
 }
 
 .stars-count {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
 .stars-price {
   color: var(--accent);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.4rem;
 }
 
 .buy-btn {
   background: rgba(255, 215, 0, 0.1);
   color: var(--accent);
   border: 1px solid var(--accent);
-  padding: 0.5rem 1.2rem;
-  border-radius: 6px;
+  padding: 0.8rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s;
-  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  margin-top: auto;
 }
 
 .buy-btn:hover {
   background: rgba(255, 215, 0, 0.2);
+  transform: translateY(-2px);
 }
 
+.footer-note {
+  text-align: center;
+  margin-top: 2rem;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+/* Форма заказа */
 .order-form {
-  padding: 1.5rem;
-  margin-top: 1.5rem;
+  padding: 2rem;
+  margin-top: 2rem;
   animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .order-form h3 {
   text-align: center;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .form-group {
-  margin-bottom: 1.2rem;
-  position: relative;
+  margin-bottom: 1.5rem;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .form-group input {
   width: 100%;
-  padding: 0.7rem;
+  padding: 0.9rem;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
+  border-radius: 8px;
   color: white;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
 }
 
 .error-message {
   color: #ff5555;
   font-size: 0.8rem;
-  margin-top: 0.3rem;
+  margin-top: 0.5rem;
   display: none;
 }
 
@@ -236,43 +299,42 @@ input.error {
 }
 
 .selected-package {
-  margin: 1.2rem 0;
-  padding: 0.8rem;
+  margin: 1.5rem 0;
+  padding: 1.2rem;
   background: rgba(255, 215, 0, 0.05);
   border: 1px solid rgba(255, 215, 0, 0.2);
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 600;
-  font-size: 0.9rem;
+  text-align: center;
 }
 
 .payment-btn {
   width: 100%;
-  padding: 0.8rem;
+  padding: 1rem;
   background: var(--accent);
   color: var(--dark);
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
-  font-size: 0.9rem;
-  position: relative;
-  height: 40px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
 }
 
 .payment-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.01);
   box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
 }
 
+/* Инструкция к заказу */
 .payment-notice {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   background: rgba(255, 215, 0, 0.1);
   border-left: 3px solid var(--accent);
-  padding: 10px 12px;
-  margin: 12px 0;
-  border-radius: 4px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 6px;
 }
 
 .notice-icon {
@@ -281,25 +343,32 @@ input.error {
   justify-content: center;
   background: var(--accent);
   color: var(--dark);
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   font-weight: bold;
-  margin-right: 10px;
+  margin-right: 12px;
   flex-shrink: 0;
   font-size: 0.8rem;
+  font-family: var(--accent-font);
 }
 
 .payment-notice p {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+}
+
+/* Подвал */
+footer {
+  margin-top: 4rem;
+  padding: 2rem 1rem;
 }
 
 .footer-content {
   max-width: 800px;
   margin: 0 auto;
-  padding: 1.2rem;
   text-align: center;
 }
 
@@ -307,17 +376,17 @@ input.error {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.8rem;
-  margin: 1rem 0;
   flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0;
 }
 
 .footer-link {
   color: var(--light);
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   position: relative;
-  padding: 0.2rem 0;
+  padding: 0.3rem 0;
   transition: all 0.3s ease;
 }
 
@@ -327,111 +396,124 @@ input.error {
 
 .link-divider {
   color: rgba(255, 255, 255, 0.2);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.telegram-link {
+  margin: 1.5rem 0;
+}
+
+.telegram-link a {
+  color: var(--light);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.telegram-link a:hover {
+  color: var(--accent);
+}
+
+.telegram-link i {
+  font-size: 1.2rem;
 }
 
 .copyright {
   color: rgba(255, 255, 255, 0.5);
-  font-size: 0.8rem;
-  letter-spacing: 0.5px;
-  margin-top: 1rem;
-}
-
-.telegram-container {
-  margin: 1.2rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.telegram-badge {
-  width: 50px;
-  height: 50px;
-  background: #0088cc;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  transition: transform 0.3s;
-}
-
-.telegram-badge:hover {
-  transform: scale(1.1);
-}
-
-.telegram-icon {
-  color: white;
-  font-size: 1.8rem;
-}
-
-.telegram-text {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.footer-note {
-  text-align: center;
+  font-size: 0.85rem;
   margin-top: 1.5rem;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Страницы privacy и rules */
+.privacy-container, .rules-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.privacy-container h1, .rules-container h1 {
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.privacy-container h2, .rules-container h2 {
+  margin: 1.5rem 0 1rem;
+  color: var(--accent);
+  font-size: 1.4rem;
+}
+
+.privacy-container p, .rules-container p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.privacy-container ul, .rules-container ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.privacy-container li, .rules-container li {
+  margin-bottom: 0.5rem;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  color: var(--accent);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  header {
+    padding: 1rem;
+  }
+  
+  .hero {
+    padding: 2rem 1.5rem;
+  }
+  
+  .purchase-section, .order-form {
+    padding: 1.5rem;
+  }
+  
+  .package-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .link-divider {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
   .hero h1 {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+  }
+  
+  .cta-btn {
+    padding: 0.9rem 1.8rem;
+    font-size: 1rem;
   }
   
   .package-item {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
+    padding: 1.2rem;
   }
   
-  .buy-btn {
-    width: 100%;
+  .privacy-container, .rules-container {
+    padding: 1.5rem;
   }
-  
-  iframe {
-    height: 400px;
-  }
-}
-
-/* Анимации */
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.03); }
-  100% { transform: scale(1); }
-}
-
-.pulse {
-  animation: pulse 2s infinite;
-}
-
-.btn-click {
-  animation: clickEffect 0.3s;
-}
-
-@keyframes clickEffect {
-  0% { transform: scale(1); }
-  50% { transform: scale(0.95); }
-  100% { transform: scale(1); }
-}
-
-/* Стили для состояния загрузки */
-#submitSpinner {
-  display: none;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.payment-btn.loading #submitText {
-  visibility: hidden;
-}
-
-.payment-btn.loading #submitSpinner {
-  display: block;
 }
