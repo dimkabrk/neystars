@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     const SBP_PAYMENT_LINK = "https://www.tinkoff.ru/rm/r_KQkcHeUggc.aUMaYfOFtp/Q1P6h40111";
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby0m8uskb9_ThPhNdVtszSagTQ6x5i7LY0UvO0lR42eHW3-FJzmwhfrrP_z34sZuax0/exec";
     
     const buyBtns = document.querySelectorAll('.buy-btn');
     const orderForm = document.getElementById('orderForm');
@@ -94,18 +93,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 second: '2-digit'
             });
 
-            const formData = new FormData();
-            formData.append('timestamp', timestamp);
-            formData.append('username', username);
-            formData.append('package', `${currentPackage.stars} звёзд`);
-            formData.append('amount', `${currentPackage.price} ₽`);
+            // Отправка данных в Telegram бота (безопасный способ)
+            const botToken = '7732889503:AAHCCvKO1MjTvqN9l2rdqC7DeC8eJv6JYpE'; // Замените на реальный токен бота
+            const chatId = '7989767066'; // Ваш chat_id в Telegram
+            const message = `Новый заказ:\n\nUsername: ${username}\nПакет: ${currentPackage.stars} звёзд\nСумма: ${currentPackage.price} ₽\nВремя: ${timestamp}`;
             
-            const response = await fetch(GOOGLE_SCRIPT_URL, {
+            const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
             });
             
             if (!response.ok) throw new Error('Ошибка сети');
+            
+            const result = await response.json();
+            if (!result.ok) throw new Error('Ошибка отправки');
             
             showAlert('Заявка принята! Сейчас вы будете перенаправлены на оплату.', 'success');
             
