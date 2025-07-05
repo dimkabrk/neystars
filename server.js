@@ -10,6 +10,10 @@ const port = process.env.PORT || 3000;
 // Инициализация бота
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN);
 
+// В server.js после инициализации бота
+bot.setWebHook(); // Явно отключаем вебхуки
+console.log('Bot running in polling mode for single user');
+
 // Middleware
 app.use(bodyParser.json());
 
