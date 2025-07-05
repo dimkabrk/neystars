@@ -1,46 +1,62 @@
-document.addEventListener('DOMContentLoaded', function() {
-  // Элементы формы
-  const purchaseForm = document.getElementById('purchaseForm');
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('purchaseForm');
   
-  purchaseForm.addEventListener('submit', async function(e) {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    const username = document.getElementById('username').value.trim();
-    const packageData = {
-      stars: document.querySelector('.package-item.active').dataset.stars,
-      price: document.querySelector('.package-item.active').dataset.price
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span> Отправка...';
+
+    const orderData = {
+      username: document.getElementById('username').value.trim(),
+      packageData: {
+        stars: document.querySelector('.package-item.active').dataset.stars,
+        price: document.querySelector('.package-item.active').dataset.price
+      }
     };
 
-    // Подпись данных (без использования секретного ключа)
-    const signature = await generateClientSignature(username, packageData);
-    
     try {
-      const response = await fetch('/api/orders', {
+      // Клиентская подпись (без секрета)
+      const signature = await generateClientSignature(orderData);
+      
+      const response = await fetch('/api/submit-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, packageData, clientSignature: signature })
+        body: JSON.stringify({ ...orderData, signature })
       });
 
-      const data = await response.json();
+      const result = await response.json();
       
-      if (data.success) {
-        showAlert('✅ Заказ успешно отправлен!', 'success');
+      if (result.success) {
+        showAlert('✅ Заявка успешно отправлена!', 'success');
+        form.reset();
       } else {
-        showAlert('❌ Ошибка при отправке заказа', 'error');
+        showAlert('❌ Ошибка при отправке', 'error');
       }
     } catch (error) {
       console.error('Error:', error);
-      showAlert('❌ Ошибка соединения', 'error');
+      showAlert('⚠️ Ошибка соединения', 'warning');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Отправить заявку';
     }
   });
 
-  // Генерация подписи на клиенте (имитация)
-  async function generateClientSignature(username, packageData) {
-    const dataString = `${username}|${packageData.stars}|${packageData.price}`;
+  async function generateClientSignature(data) {
+    const str = `${data.username}|${data.packageData.stars}|${data.packageData.price}`;
     const encoder = new TextEncoder();
-    const data = encoder.encode(dataString);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    const hash = await crypto.subtle.digest('SHA-256', encoder.encode(str));
+    return Array.from(new Uint8Array(hash))
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+  function showAlert(message, type) {
+    const alert = document.createElement('div');
+    alert.className = `alert ${type}`;
+    alert.textContent = message;
+    document.body.appendChild(alert);
+    setTimeout(() => alert.remove(), 5000);
   }
 });
