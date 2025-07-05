@@ -565,3 +565,35 @@ footer {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+/* Стиль для активного пакета */
+.package-item.active {
+    border-color: #ffd700;
+    background: rgba(255, 215, 0, 0.05);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+}
+
+/* Анимация кнопки */
+.buy-btn {
+    transition: all 0.3s ease;
+}
+
+.buy-btn:active {
+    transform: scale(0.95);
+}
+
+/* Форма заказа */
+#orderForm {
+    transition: all 0.5s ease;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+}
+
+#orderForm.show {
+    max-height: 500px;
+    opacity: 1;
+    padding: 2rem;
+}
